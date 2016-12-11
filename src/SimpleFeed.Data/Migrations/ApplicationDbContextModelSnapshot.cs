@@ -6,8 +6,8 @@ namespace SimpleFeed.Data.Migrations
     using Microsoft.EntityFrameworkCore.Metadata;
     using SimpleFeed.Data;
 
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(SimpleFeedContext))]
+    internal partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

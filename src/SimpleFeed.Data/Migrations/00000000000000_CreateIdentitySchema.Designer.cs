@@ -7,9 +7,9 @@ namespace SimpleFeed.Data.Migrations
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(SimpleFeedContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    internal partial class CreateIdentitySchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

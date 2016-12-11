@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-SimpleFeed-22df1c83-d68e-4a85-bd9f-5bfba14f85b1",
 
   "dependencies": {
@@ -38,7 +38,8 @@
       "type": "build"
     },
     "NETStandard.Library": "1.6.1",
-    "SimpleFeed.Data": "1.0.0"
+    "SimpleFeed.Data": "1.0.0",
+    "SimpleFeed.Core": "1.0.0"
   },
 
   "tools": {

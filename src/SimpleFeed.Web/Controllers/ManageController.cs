@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SimpleFeed.Models;
 using SimpleFeed.Models.ManageViewModels;
 using SimpleFeed.Services;
-using SimpleFeed.Data.Identity;
 
 namespace SimpleFeed.Controllers
 {
-    using Data.Identity;
+    using Core.User;
 
     [Authorize]
     public class ManageController : Controller

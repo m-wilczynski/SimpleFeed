@@ -1,12 +1,12 @@
 namespace SimpleFeed.Data
 {
-    using Identity;
+    using Core.User;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class SimpleFeedContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public SimpleFeedContext(DbContextOptions<SimpleFeedContext> options)
             : base(options)
         {
         }

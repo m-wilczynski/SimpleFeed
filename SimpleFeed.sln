@@ -14,6 +14,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFeed.Web", "src\Simpl
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFeed.Data", "src\SimpleFeed.Data\SimpleFeed.Data.xproj", "{11FA1695-6D72-414B-8D23-B6C692425FFE}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFeed.Core", "src\SimpleFeed.Core\SimpleFeed.Core.xproj", "{442D66E6-5789-4087-98CA-4E59B7F52AC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{11FA1695-6D72-414B-8D23-B6C692425FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11FA1695-6D72-414B-8D23-B6C692425FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11FA1695-6D72-414B-8D23-B6C692425FFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{442D66E6-5789-4087-98CA-4E59B7F52AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{442D66E6-5789-4087-98CA-4E59B7F52AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{442D66E6-5789-4087-98CA-4E59B7F52AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{442D66E6-5789-4087-98CA-4E59B7F52AC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,5 +41,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{C0D15A37-A0DE-4C81-92A9-2EDF4D10AA9F} = {BA439C52-CE51-48C3-A917-BE7F95FAB1CD}
 		{11FA1695-6D72-414B-8D23-B6C692425FFE} = {BA439C52-CE51-48C3-A917-BE7F95FAB1CD}
+		{442D66E6-5789-4087-98CA-4E59B7F52AC2} = {BA439C52-CE51-48C3-A917-BE7F95FAB1CD}
 	EndGlobalSection
 EndGlobal

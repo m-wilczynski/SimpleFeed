@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SimpleFeed.Data;
-using SimpleFeed.Models;
 using SimpleFeed.Services;
-using SimpleFeed.Data.Identity;
 
 namespace SimpleFeed
 {
-    using Data.Identity;
+    using Core.User;
 
     public class Startup
     {
@@ -43,11 +37,11 @@ namespace SimpleFeed
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<SimpleFeedContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<SimpleFeedContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
