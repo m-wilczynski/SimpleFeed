@@ -39,7 +39,11 @@
     },
     "NETStandard.Library": "1.6.1",
     "SimpleFeed.Data": "1.0.0",
-    "SimpleFeed.Core": "1.0.0"
+    "SimpleFeed.Core": "1.0.0",
+    "Microsoft.EntityFrameworkCore.Tools": {
+      "version": "1.1.0-preview4-final",
+      "type": "build"
+    }
   },
 
   "tools": {
@@ -52,7 +56,8 @@
       "imports": [
         "portable-net45+win8"
       ]
-    }
+    },
+    "Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-preview4-final"
   },
 
   "frameworks": {

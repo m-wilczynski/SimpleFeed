@@ -16,6 +16,7 @@ namespace SimpleFeed.Core.Interactions
 
             FeedEntry = feedEntry;
             IsPositive = isPositive;
+            Creator = creatorId;
         }
     }
 }

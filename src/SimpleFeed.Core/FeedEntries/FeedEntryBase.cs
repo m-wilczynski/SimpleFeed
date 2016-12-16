@@ -2,13 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Interactions;
 
     public abstract class FeedEntryBase : ModelBase
     {
         private readonly Dictionary<Guid, FeedEntryComment> _comments = new Dictionary<Guid, FeedEntryComment>();
-        private readonly Dictionary<Guid, FeedEntryVote> _votes = new Dictionary<Guid, FeedEntryVote>(); 
+        private readonly Dictionary<Guid, FeedEntryVote> _votes = new Dictionary<Guid, FeedEntryVote>();
+        private readonly HashSet<Guid> _voters = new HashSet<Guid>(); 
 
         protected FeedEntryBase(Guid? id = null) : base(id)
         {
@@ -47,14 +47,20 @@
         public FeedEntryVote MakeVote(bool isPositive, Guid voterId, Guid? commentId = null)
         {
             if (commentId != null && _votes.ContainsKey(commentId.Value)) return null;
-            var commentEntry = new FeedEntryVote(this, isPositive, voterId, commentId);
-            _votes.Add(commentEntry.Id, commentEntry);
-            return commentEntry;
+            if (_voters.Contains(voterId)) return null;
+
+            var vote = new FeedEntryVote(this, isPositive, voterId, commentId);
+
+            _votes.Add(vote.Id, vote);
+            _voters.Add(vote.Creator.Value);
+            return vote;
         }
 
         public bool RemoveVote(Guid commentId)
         {
             if (!_votes.ContainsKey(commentId)) return false;
+
+            _voters.Remove(_votes[commentId].Creator.Value);
             _votes.Remove(commentId);
             return true;
         }

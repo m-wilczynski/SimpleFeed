@@ -10,6 +10,8 @@ using SimpleFeed.Services;
 
 namespace SimpleFeed
 {
+    using System;
+    using System.Reflection;
     using Core.User;
 
     public class Startup
@@ -38,10 +40,11 @@ namespace SimpleFeed
         {
             // Add framework services.
             services.AddDbContext<SimpleFeedContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), 
+                    b => b.MigrationsAssembly(typeof(SimpleFeedContext).GetTypeInfo().Assembly.FullName)));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<SimpleFeedContext>()
+            services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<SimpleFeedContext, Guid>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();

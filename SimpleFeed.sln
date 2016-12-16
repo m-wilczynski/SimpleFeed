@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3842E80-B2B3-45B3-B594-B8049DFE671A}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
+		run-migrations.bat = run-migrations.bat
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFeed.Web", "src\SimpleFeed.Web\SimpleFeed.Web.xproj", "{C0D15A37-A0DE-4C81-92A9-2EDF4D10AA9F}"

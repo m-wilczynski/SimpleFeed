@@ -10,6 +10,7 @@ using SimpleFeed.Services;
 namespace SimpleFeed.Controllers
 {
     using Core.User;
+    using Data;
 
     [Authorize]
     public class ManageController : Controller

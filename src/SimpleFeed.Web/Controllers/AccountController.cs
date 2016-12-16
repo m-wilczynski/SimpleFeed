@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 namespace SimpleFeed.Controllers
 {
     using Core.User;
+    using Data;
 
     [Authorize]
     public class AccountController : Controller
