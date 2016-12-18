@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using FeedEntries;
+    using FeedEntries.Base;
 
     public class FeedEntryComment : ModelBase
     {

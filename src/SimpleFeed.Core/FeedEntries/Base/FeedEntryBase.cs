@@ -1,4 +1,4 @@
-﻿namespace SimpleFeed.Core.FeedEntries
+﻿namespace SimpleFeed.Core.FeedEntries.Base
 {
     using System;
     using System.Collections.Generic;
@@ -8,11 +8,16 @@
     {
         private readonly Dictionary<Guid, FeedEntryComment> _comments = new Dictionary<Guid, FeedEntryComment>();
         private readonly Dictionary<Guid, FeedEntryVote> _votes = new Dictionary<Guid, FeedEntryVote>();
-        private readonly HashSet<Guid> _voters = new HashSet<Guid>(); 
+        private readonly HashSet<Guid> _voters = new HashSet<Guid>();
 
-        protected FeedEntryBase(Guid? id = null) : base(id)
+        protected FeedEntryBase(Guid creatorId, Guid? id = null) : base(id)
         {
+            if (creatorId.Equals(Guid.Empty))
+                throw new ArgumentNullException(nameof(creatorId));
+            Creator = creatorId;
         }
+
+        public bool IsPublished { get; set; }
 
         public Dictionary<Guid, FeedEntryComment> Comments => new Dictionary<Guid, FeedEntryComment>(_comments);
         public Dictionary<Guid, FeedEntryVote> Votes => new Dictionary<Guid, FeedEntryVote>(_votes);
@@ -64,6 +69,5 @@
             _votes.Remove(commentId);
             return true;
         }
-
     }
 }

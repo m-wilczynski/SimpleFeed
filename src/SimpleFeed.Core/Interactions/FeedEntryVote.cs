@@ -3,6 +3,8 @@ using SimpleFeed.Core.FeedEntries;
 
 namespace SimpleFeed.Core.Interactions
 {
+    using FeedEntries.Base;
+
     public class FeedEntryVote : ModelBase
     {
         public readonly FeedEntryBase FeedEntry;

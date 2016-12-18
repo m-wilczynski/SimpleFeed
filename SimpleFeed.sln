@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BA439C52-CE5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A3842E80-B2B3-45B3-B594-B8049DFE671A}"
 	ProjectSection(SolutionItems) = preProject
+		add-migration.bat = add-migration.bat
 		global.json = global.json
 		run-migrations.bat = run-migrations.bat
 	EndProjectSection
