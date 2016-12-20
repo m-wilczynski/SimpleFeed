@@ -1,7 +1,6 @@
 namespace SimpleFeed.Data
 {
     using System;
-    using EntityFramework.EntityConfigurations;
     using SimpleFeed.Core.User;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -16,7 +15,6 @@ namespace SimpleFeed.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.WithIdentityMapping();
         }
     }
 }
