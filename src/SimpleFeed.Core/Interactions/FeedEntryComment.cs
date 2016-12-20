@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using FeedEntries;
     using FeedEntries.Base;
 
     public class FeedEntryComment : ModelBase
@@ -24,18 +23,20 @@
             Comment = comment;
         }
 
+        public Dictionary<Guid, CommentVote> Votes => new Dictionary<Guid, CommentVote>(_votes);
+
         public CommentVote GetVote(Guid commentId)
         {
             if (!_votes.ContainsKey(commentId)) return null;
             return _votes[commentId];
         }
 
-        public CommentVote MakeVote(bool isPositive, Guid voterId, Guid? commentId = null)
+        public CommentVote MakeVote(bool isPositive, Guid voterId, Guid? voteId = null)
         {
-            if (commentId != null && _votes.ContainsKey(commentId.Value)) return null;
+            if (voteId != null && _votes.ContainsKey(voteId.Value)) return null;
             if (_voters.Contains(voterId)) return null;
 
-            var voteEntry = new CommentVote(this, isPositive, voterId, commentId);
+            var voteEntry = new CommentVote(this, isPositive, voterId, voteId);
 
             _votes.Add(voteEntry.Id, voteEntry);
             _voters.Add(voterId);

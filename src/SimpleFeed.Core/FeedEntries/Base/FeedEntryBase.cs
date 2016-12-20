@@ -49,12 +49,12 @@
             return _votes[commentId];
         }
 
-        public FeedEntryVote MakeVote(bool isPositive, Guid voterId, Guid? commentId = null)
+        public FeedEntryVote MakeVote(bool isPositive, Guid voterId, Guid? voteId = null)
         {
-            if (commentId != null && _votes.ContainsKey(commentId.Value)) return null;
+            if (voteId != null && _votes.ContainsKey(voteId.Value)) return null;
             if (_voters.Contains(voterId)) return null;
 
-            var vote = new FeedEntryVote(this, isPositive, voterId, commentId);
+            var vote = new FeedEntryVote(this, isPositive, voterId, voteId);
 
             _votes.Add(vote.Id, vote);
             _voters.Add(vote.Creator.Value);

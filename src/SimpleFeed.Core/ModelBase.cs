@@ -23,7 +23,7 @@
         public Guid? Creator
         {
             get { return _creator; }
-            set
+            protected set
             {
                 if (value == null)
                     throw new ArgumentNullException(nameof(Creator));

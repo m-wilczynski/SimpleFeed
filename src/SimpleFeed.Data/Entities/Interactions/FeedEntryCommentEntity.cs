@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using FeedEntries;
 
-    internal class FeedEntryCommentEntity
+    internal class FeedEntryCommentEntity : EntityBase
     {
         public string Comment { get; set; }
         public FeedEntryEntity CommentedEntity { get; set; }
