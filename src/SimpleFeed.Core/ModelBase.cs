@@ -5,7 +5,6 @@
     public abstract class ModelBase
     {
         public readonly Guid Id;
-        private DateTime? _creationDate;
         private Guid? _creator;
 
         protected ModelBase(Guid? id = null)
@@ -16,18 +15,10 @@
                 return;
             }
             Id = Guid.NewGuid();
+            CreationDate = DateTime.Now;
         }
 
-        public DateTime? CreationDate
-        {
-            get { return _creationDate; }
-            set
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(CreationDate));
-                _creationDate = value;
-            }
-        }
+        public DateTime CreationDate { get; }
 
         public Guid? Creator
         {

@@ -4,17 +4,17 @@ namespace SimpleFeed.Core.Interactions
 {
     public class CommentVote : ModelBase
     {
-        public readonly FeedEntryComment FeedEntry;
+        public readonly FeedEntryComment VotedComment;
         public bool IsPositive;
 
-        public CommentVote(FeedEntryComment feedEntry, bool isPositive, Guid creatorId, Guid? id = default(Guid?)) : base(id)
+        public CommentVote(FeedEntryComment votedComment, bool isPositive, Guid creatorId, Guid? id = default(Guid?)) : base(id)
         {
-            if (feedEntry == null)
-                throw new ArgumentNullException(nameof(feedEntry));
+            if (votedComment == null)
+                throw new ArgumentNullException(nameof(votedComment));
             if (creatorId.Equals(Guid.Empty))
                 throw new ArgumentNullException(nameof(creatorId));
 
-            FeedEntry = feedEntry;
+            VotedComment = votedComment;
             IsPositive = isPositive;
             Creator = creatorId;
         }
