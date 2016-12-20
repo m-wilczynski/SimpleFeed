@@ -4,6 +4,6 @@
 
     internal class UploadedFileFeedEntryEntity : FeedEntryEntity
     {
-        public Uri RelativeFilePath { get; set; }
+        public string RelativeFilePath { get; set; }
     }
 }

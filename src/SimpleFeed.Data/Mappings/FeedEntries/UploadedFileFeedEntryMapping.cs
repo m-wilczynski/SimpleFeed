@@ -1,5 +1,6 @@
 ﻿namespace SimpleFeed.Data.Mappings.FeedEntries
 {
+    using System;
     using Core.FeedEntries;
     using Entities.FeedEntries;
 
@@ -7,7 +8,7 @@
     {
         public static UploadedFileFeedEntry AsDomain(this UploadedFileFeedEntryEntity entity)
         {
-            var entry = new UploadedFileFeedEntry(entity.RelativeFilePath, entity.CreatorId.Value, entity.Id);
+            var entry = new UploadedFileFeedEntry(new Uri(entity.RelativeFilePath), entity.CreatorId.Value, entity.Id);
             entry.WithVotesAndCommentsWired(entity)
                  .WithCreationDateInjected(entity.CreationDate);
             return entry;
@@ -21,7 +22,7 @@
                 CreatorId = model.Creator.Value,
                 CreationDate = model.CreationDate,
                 IsPublished = model.IsPublished,
-                RelativeFilePath = model.RelativeFilePath
+                RelativeFilePath = model.RelativeFilePath.ToString()
             };
             entity.WithVotesAndCommentsWired(model);
 

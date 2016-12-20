@@ -1,5 +1,6 @@
 ﻿namespace SimpleFeed.Data.Mappings.FeedEntries
 {
+    using System;
     using Core.FeedEntries;
     using Entities.FeedEntries;
 
@@ -7,7 +8,7 @@
     {
         public static ExternalLinkFeedEntry AsDomain(this ExternalLinkFeedEntryEntity entity)
         {
-            var entry = new ExternalLinkFeedEntry(entity.LinkAddress, entity.CreatorId.Value, entity.Id);
+            var entry = new ExternalLinkFeedEntry(new Uri(entity.LinkAddress), entity.CreatorId.Value, entity.Id);
             entry.WithVotesAndCommentsWired(entity)
                  .WithCreationDateInjected(entity.CreationDate);
             return entry;
@@ -21,7 +22,7 @@
                 CreatorId = model.Creator.Value,
                 CreationDate = model.CreationDate,
                 IsPublished = model.IsPublished,
-                LinkAddress = model.LinkAddress
+                LinkAddress = model.LinkAddress.ToString()
             };
             entity.WithVotesAndCommentsWired(model);
 

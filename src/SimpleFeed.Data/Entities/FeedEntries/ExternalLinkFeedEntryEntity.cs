@@ -4,6 +4,6 @@
 
     internal class ExternalLinkFeedEntryEntity : FeedEntryEntity
     {
-        public Uri LinkAddress { get; set; }
+        public string LinkAddress { get; set; }
     }
 }
