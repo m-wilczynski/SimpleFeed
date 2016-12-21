@@ -22,7 +22,6 @@ namespace SimpleFeed.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
             //builder.Entity<FeedEntryCommentEntity>().Property(c => c.Id).HasColumnName("varbinary(16)");
         }
     }
