@@ -4,7 +4,7 @@
     {
         public readonly string InvalidInputName;
 
-        public InvalidInputValidationResult(bool wasSuccessful, string invalidInputName) : base(wasSuccessful)
+        public InvalidInputValidationResult(string invalidInputName) : base(false)
         {
             InvalidInputName = invalidInputName;
         }

@@ -30,6 +30,7 @@
             using (Context = new SimpleFeedContext())
             {
                 var validationResult = Validate();
+                if (!validationResult.WasSuccessful) return new PersistenceOperationResult(validationResult);
                 ExecuteInternal();
                 return new PersistenceOperationResult(validationResult);
             }
