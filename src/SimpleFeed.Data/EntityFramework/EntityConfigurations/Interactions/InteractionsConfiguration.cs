@@ -2,6 +2,7 @@
 {
     using Entities.Interactions;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     internal static class InteractionsConfiguration
@@ -12,7 +13,7 @@
             entityBuilder.Property(e => e.Comment).HasColumnName("comment_content").IsRequired();
 
             entityBuilder.HasOne(e => e.CommentedEntity).WithMany(fe => fe.Comments).IsRequired();
-            entityBuilder.HasMany(e => e.Votes).WithOne(cv => cv.VotedComment).IsRequired();
+            entityBuilder.HasMany(e => e.Votes).WithOne(cv => cv.VotedComment).IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             entityBuilder.ToTable("feed_entry_comment");
         }

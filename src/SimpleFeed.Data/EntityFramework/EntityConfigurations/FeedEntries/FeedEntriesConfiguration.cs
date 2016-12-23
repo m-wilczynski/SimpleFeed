@@ -2,6 +2,7 @@
 {
     using Entities.FeedEntries;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     internal static class FeedEntriesConfiguration
@@ -26,8 +27,8 @@
         {
             entityBuilder.HasBaseEntityConfig();
             entityBuilder.Property(e => e.IsPublished).IsRequired().HasColumnType("bit(1)").HasColumnName("is_published");
-            entityBuilder.HasMany(e => e.Votes).WithOne(v => v.VotedEntry).IsRequired();
-            entityBuilder.HasMany(e => e.Comments).WithOne(c => c.CommentedEntity).IsRequired();
+            entityBuilder.HasMany(e => e.Votes).WithOne(v => v.VotedEntry).IsRequired().OnDelete(DeleteBehavior.Cascade);
+            entityBuilder.HasMany(e => e.Comments).WithOne(c => c.CommentedEntity).IsRequired().OnDelete(DeleteBehavior.Cascade);
             entityBuilder.ToTable("feed_entry");
         }
     }
