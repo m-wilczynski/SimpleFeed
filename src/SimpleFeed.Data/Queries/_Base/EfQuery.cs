@@ -1,10 +1,12 @@
-﻿namespace SimpleFeed.Data.Commands._Base
+﻿namespace SimpleFeed.Data.Queries._Base
 {
     using OperationResults;
     using OperationResults.ValidationResults;
 
-    public abstract class EfCommand<TOutput>
+    public abstract class EfQuery<TOutput>
     {
+        public bool LoadNavigationProperties { get; set; } = true;
+
         internal SimpleFeedContext Context;
 
         public PersistenceOperationResult<TOutput> Execute()
@@ -19,25 +21,6 @@
         }
 
         protected abstract TOutput ExecuteInternal();
-        protected abstract PersistenceOperationValidationResult Validate();
-    }
-
-    public abstract class EfCommand
-    {
-        internal SimpleFeedContext Context;
-
-        public PersistenceOperationResult Execute()
-        {
-            using (Context = new SimpleFeedContext())
-            {
-                var validationResult = Validate();
-                if (!validationResult.WasSuccessful) return new PersistenceOperationResult(validationResult);
-                ExecuteInternal();
-                return new PersistenceOperationResult(validationResult);
-            }
-        }
-
-        protected abstract void ExecuteInternal();
         protected abstract PersistenceOperationValidationResult Validate();
     }
 }
