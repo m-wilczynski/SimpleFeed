@@ -191,7 +191,7 @@ namespace SimpleFeed.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("feed_entries");
+                    b.ToTable("feed_entry");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("FeedEntryEntity");
                 });

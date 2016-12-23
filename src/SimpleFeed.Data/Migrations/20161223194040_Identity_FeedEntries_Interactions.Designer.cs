@@ -8,7 +8,7 @@ using SimpleFeed.Data;
 namespace SimpleFeed.Data.Migrations
 {
     [DbContext(typeof(SimpleFeedContext))]
-    [Migration("20161223181741_Identity_FeedEntries_Interactions")]
+    [Migration("20161223194040_Identity_FeedEntries_Interactions")]
     partial class Identity_FeedEntries_Interactions
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,7 +192,7 @@ namespace SimpleFeed.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("feed_entries");
+                    b.ToTable("feed_entry");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("FeedEntryEntity");
                 });

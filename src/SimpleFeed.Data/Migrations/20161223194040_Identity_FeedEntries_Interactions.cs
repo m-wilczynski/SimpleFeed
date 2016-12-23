@@ -64,7 +64,7 @@ namespace SimpleFeed.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "feed_entries",
+                name: "feed_entry",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "binary(16)", nullable: false)
@@ -79,7 +79,7 @@ namespace SimpleFeed.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_feed_entries", x => x.id);
+                    table.PrimaryKey("PK_feed_entry", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,9 +183,9 @@ namespace SimpleFeed.Data.Migrations
                 {
                     table.PrimaryKey("PK_feed_entry_comment", x => x.id);
                     table.ForeignKey(
-                        name: "FK_feed_entry_comment_feed_entries_CommentedEntityId",
+                        name: "FK_feed_entry_comment_feed_entry_CommentedEntityId",
                         column: x => x.CommentedEntityId,
-                        principalTable: "feed_entries",
+                        principalTable: "feed_entry",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -205,9 +205,9 @@ namespace SimpleFeed.Data.Migrations
                 {
                     table.PrimaryKey("PK_feed_entry_vote", x => x.id);
                     table.ForeignKey(
-                        name: "FK_feed_entry_vote_feed_entries_VotedEntryId",
+                        name: "FK_feed_entry_vote_feed_entry_VotedEntryId",
                         column: x => x.VotedEntryId,
-                        principalTable: "feed_entries",
+                        principalTable: "feed_entry",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -320,7 +320,7 @@ namespace SimpleFeed.Data.Migrations
                 name: "feed_entry_comment");
 
             migrationBuilder.DropTable(
-                name: "feed_entries");
+                name: "feed_entry");
         }
     }
 }

@@ -28,7 +28,7 @@
             entityBuilder.Property(e => e.IsPublished).IsRequired().HasColumnType("bit(1)").HasColumnName("is_published");
             entityBuilder.HasMany(e => e.Votes).WithOne(v => v.VotedEntry).IsRequired();
             entityBuilder.HasMany(e => e.Comments).WithOne(c => c.CommentedEntity).IsRequired();
-            entityBuilder.ToTable("feed_entries");
+            entityBuilder.ToTable("feed_entry");
         }
     }
 }
