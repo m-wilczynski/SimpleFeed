@@ -6,7 +6,7 @@
 
     internal static class EntityConfiguration
     {
-        public static void WithEntityConfig<TEntity>(this EntityTypeBuilder<TEntity> entityBuilder)
+        public static void HasBaseEntityConfig<TEntity>(this EntityTypeBuilder<TEntity> entityBuilder)
             where TEntity : EntityBase
         {
             entityBuilder.HasKey(e => e.Id);

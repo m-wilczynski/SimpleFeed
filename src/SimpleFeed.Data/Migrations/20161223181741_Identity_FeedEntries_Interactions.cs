@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SimpleFeed.Data.Migrations
 {
-    public partial class Identity : Migration
+    public partial class Identity_FeedEntries_Interactions : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,6 +61,25 @@ namespace SimpleFeed.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "feed_entries",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "binary(16)", nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    creation_date = table.Column<DateTime>(nullable: false),
+                    creator_id = table.Column<Guid>(nullable: true),
+                    Discriminator = table.Column<string>(nullable: false),
+                    is_published = table.Column<bool>(type: "bit(1)", nullable: false),
+                    link_uri = table.Column<string>(nullable: true),
+                    relative_file_path = table.Column<string>(nullable: true),
+                    text_content = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_feed_entries", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,6 +168,72 @@ namespace SimpleFeed.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "feed_entry_comment",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "binary(16)", nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    comment_content = table.Column<string>(nullable: false),
+                    CommentedEntityId = table.Column<Guid>(nullable: false),
+                    creation_date = table.Column<DateTime>(nullable: false),
+                    creator_id = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_feed_entry_comment", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_feed_entry_comment_feed_entries_CommentedEntityId",
+                        column: x => x.CommentedEntityId,
+                        principalTable: "feed_entries",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "feed_entry_vote",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "binary(16)", nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    creation_date = table.Column<DateTime>(nullable: false),
+                    creator_id = table.Column<Guid>(nullable: true),
+                    is_positive = table.Column<bool>(nullable: false),
+                    VotedEntryId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_feed_entry_vote", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_feed_entry_vote_feed_entries_VotedEntryId",
+                        column: x => x.VotedEntryId,
+                        principalTable: "feed_entries",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "feed_entry_comment_vote",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "binary(16)", nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    creation_date = table.Column<DateTime>(nullable: false),
+                    creator_id = table.Column<Guid>(nullable: true),
+                    is_positive = table.Column<bool>(type: "bit(1)", nullable: false),
+                    VotedCommentId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_feed_entry_comment_vote", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_feed_entry_comment_vote_feed_entry_comment_VotedCommentId",
+                        column: x => x.VotedCommentId,
+                        principalTable: "feed_entry_comment",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -185,6 +270,21 @@ namespace SimpleFeed.Data.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_feed_entry_comment_vote_VotedCommentId",
+                table: "feed_entry_comment_vote",
+                column: "VotedCommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_feed_entry_comment_CommentedEntityId",
+                table: "feed_entry_comment",
+                column: "CommentedEntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_feed_entry_vote_VotedEntryId",
+                table: "feed_entry_vote",
+                column: "VotedEntryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -205,10 +305,22 @@ namespace SimpleFeed.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "feed_entry_comment_vote");
+
+            migrationBuilder.DropTable(
+                name: "feed_entry_vote");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "feed_entry_comment");
+
+            migrationBuilder.DropTable(
+                name: "feed_entries");
         }
     }
 }

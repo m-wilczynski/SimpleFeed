@@ -3,6 +3,8 @@ namespace SimpleFeed.Data
     using System;
     using Entities.FeedEntries;
     using Entities.Interactions;
+    using EntityFramework.EntityConfigurations.FeedEntries;
+    using EntityFramework.EntityConfigurations.Interactions;
     using SimpleFeed.Core.User;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -22,7 +24,14 @@ namespace SimpleFeed.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            //builder.Entity<FeedEntryCommentEntity>().Property(c => c.Id).HasColumnName("varbinary(16)");
+            
+            builder.Entity<FeedEntryEntity>().HasFeedEntryConfig();
+            builder.Entity<ExternalLinkFeedEntryEntity>().HasExternalLinkConfiguration();
+            builder.Entity<UploadedFileFeedEntryEntity>().HasUploadedFileConfiguration();
+            builder.Entity<UploadedTextFeedEntryEntity>().HasUploadedTextConfiguration();
+            builder.Entity<FeedEntryCommentEntity>().HasFeedEntryCommentConfig();
+            builder.Entity<FeedEntryVoteEntity>().HasFeedEntryVoteConfig();
+            builder.Entity<CommentVoteEntity>().HasCommentVoteConfig();
         }
     }
 }

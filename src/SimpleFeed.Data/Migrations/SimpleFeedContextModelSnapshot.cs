@@ -169,6 +169,152 @@ namespace SimpleFeed.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("SimpleFeed.Data.Entities.FeedEntries.FeedEntryEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("binary(16)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnName("creation_date");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("creator_id");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnName("is_published")
+                        .HasColumnType("bit(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("feed_entries");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("FeedEntryEntity");
+                });
+
+            modelBuilder.Entity("SimpleFeed.Data.Entities.Interactions.CommentVoteEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("binary(16)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnName("creation_date");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("creator_id");
+
+                    b.Property<bool>("IsPositive")
+                        .HasColumnName("is_positive")
+                        .HasColumnType("bit(1)");
+
+                    b.Property<Guid?>("VotedCommentId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VotedCommentId");
+
+                    b.ToTable("feed_entry_comment_vote");
+                });
+
+            modelBuilder.Entity("SimpleFeed.Data.Entities.Interactions.FeedEntryCommentEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("binary(16)");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnName("comment_content");
+
+                    b.Property<Guid?>("CommentedEntityId")
+                        .IsRequired();
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnName("creation_date");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("creator_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentedEntityId");
+
+                    b.ToTable("feed_entry_comment");
+                });
+
+            modelBuilder.Entity("SimpleFeed.Data.Entities.Interactions.FeedEntryVoteEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("binary(16)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnName("creation_date");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnName("creator_id");
+
+                    b.Property<bool>("IsPositive")
+                        .HasColumnName("is_positive");
+
+                    b.Property<Guid?>("VotedEntryId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VotedEntryId");
+
+                    b.ToTable("feed_entry_vote");
+                });
+
+            modelBuilder.Entity("SimpleFeed.Data.Entities.FeedEntries.ExternalLinkFeedEntryEntity", b =>
+                {
+                    b.HasBaseType("SimpleFeed.Data.Entities.FeedEntries.FeedEntryEntity");
+
+                    b.Property<string>("LinkAddress")
+                        .IsRequired()
+                        .HasColumnName("link_uri");
+
+                    b.ToTable("ExternalLinkFeedEntryEntity");
+
+                    b.HasDiscriminator().HasValue("ExternalLinkFeedEntryEntity");
+                });
+
+            modelBuilder.Entity("SimpleFeed.Data.Entities.FeedEntries.UploadedFileFeedEntryEntity", b =>
+                {
+                    b.HasBaseType("SimpleFeed.Data.Entities.FeedEntries.FeedEntryEntity");
+
+                    b.Property<string>("RelativeFilePath")
+                        .IsRequired()
+                        .HasColumnName("relative_file_path");
+
+                    b.ToTable("UploadedFileFeedEntryEntity");
+
+                    b.HasDiscriminator().HasValue("UploadedFileFeedEntryEntity");
+                });
+
+            modelBuilder.Entity("SimpleFeed.Data.Entities.FeedEntries.UploadedTextFeedEntryEntity", b =>
+                {
+                    b.HasBaseType("SimpleFeed.Data.Entities.FeedEntries.FeedEntryEntity");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnName("text_content");
+
+                    b.ToTable("UploadedTextFeedEntryEntity");
+
+                    b.HasDiscriminator().HasValue("UploadedTextFeedEntryEntity");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole<System.Guid>")
@@ -203,6 +349,30 @@ namespace SimpleFeed.Data.Migrations
                     b.HasOne("SimpleFeed.Core.User.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SimpleFeed.Data.Entities.Interactions.CommentVoteEntity", b =>
+                {
+                    b.HasOne("SimpleFeed.Data.Entities.Interactions.FeedEntryCommentEntity", "VotedComment")
+                        .WithMany("Votes")
+                        .HasForeignKey("VotedCommentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SimpleFeed.Data.Entities.Interactions.FeedEntryCommentEntity", b =>
+                {
+                    b.HasOne("SimpleFeed.Data.Entities.FeedEntries.FeedEntryEntity", "CommentedEntity")
+                        .WithMany("Comments")
+                        .HasForeignKey("CommentedEntityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SimpleFeed.Data.Entities.Interactions.FeedEntryVoteEntity", b =>
+                {
+                    b.HasOne("SimpleFeed.Data.Entities.FeedEntries.FeedEntryEntity", "VotedEntry")
+                        .WithMany("Votes")
+                        .HasForeignKey("VotedEntryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }
