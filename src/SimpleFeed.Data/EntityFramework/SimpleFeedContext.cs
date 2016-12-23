@@ -11,6 +11,10 @@ namespace SimpleFeed.Data
 
     public class SimpleFeedContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
+        public SimpleFeedContext()
+        {
+        }
+
         public SimpleFeedContext(DbContextOptions<SimpleFeedContext> options)
             : base(options)
         {
