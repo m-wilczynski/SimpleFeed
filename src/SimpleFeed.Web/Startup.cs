@@ -39,9 +39,7 @@ namespace SimpleFeed
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<SimpleFeedContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), 
-                    b => b.MigrationsAssembly(typeof(SimpleFeedContext).GetTypeInfo().Assembly.FullName)));
+            services.AddDbContext<SimpleFeedContext>();
 
             services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<SimpleFeedContext, Guid>()
@@ -52,6 +50,7 @@ namespace SimpleFeed
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SimpleFeed.Data.Migrations
 {
-    public partial class Identity_FeedEntries_Interactions : Migration
+    public partial class Identity_And_Core : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

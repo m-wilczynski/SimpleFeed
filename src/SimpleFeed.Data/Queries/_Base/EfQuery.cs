@@ -1,17 +1,24 @@
 ﻿namespace SimpleFeed.Data.Queries._Base
 {
+    using Microsoft.Extensions.Configuration;
     using OperationResults;
     using OperationResults.ValidationResults;
 
     public abstract class EfQuery<TOutput>
     {
-        public bool LoadNavigationProperties { get; set; } = true;
-
         internal SimpleFeedContext Context;
+        internal readonly IConfiguration Configuration;
+
+        public EfQuery(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public bool LoadNavigationProperties { get; set; } = true;
 
         public PersistenceOperationResult<TOutput> Execute()
         {
-            using (Context = new SimpleFeedContext())
+            using (Context = new SimpleFeedContext(Configuration))
             {
                 var validationResult = Validate();
                 if (!validationResult.WasSuccessful) return new PersistenceOperationResult<TOutput>(default(TOutput), validationResult);

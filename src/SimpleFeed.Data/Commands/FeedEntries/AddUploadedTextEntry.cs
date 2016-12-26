@@ -3,11 +3,16 @@
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
+    using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
     using _Base;
 
     public class AddUploadedTextEntry : EfCommand
     {
+        public AddUploadedTextEntry(IConfiguration configuration) : base(configuration)
+        {
+        }
+
         public UploadedTextFeedEntry UploadedText { get; set; }
 
         protected override void ExecuteInternal()

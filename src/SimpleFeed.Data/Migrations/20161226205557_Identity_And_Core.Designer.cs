@@ -8,8 +8,8 @@ using SimpleFeed.Data;
 namespace SimpleFeed.Data.Migrations
 {
     [DbContext(typeof(SimpleFeedContext))]
-    [Migration("20161223194040_Identity_FeedEntries_Interactions")]
-    partial class Identity_FeedEntries_Interactions
+    [Migration("20161226205557_Identity_And_Core")]
+    partial class Identity_And_Core
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

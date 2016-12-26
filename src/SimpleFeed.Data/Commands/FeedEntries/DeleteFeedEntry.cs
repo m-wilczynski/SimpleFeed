@@ -3,11 +3,16 @@
     using System;
     using Core.FeedEntries.Base;
     using EntityFramework.CommonOperations;
+    using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
     using _Base;
 
     public class DeleteFeedEntry<TEntry> : EfCommand where TEntry : FeedEntryBase
     {
+        public DeleteFeedEntry(IConfiguration configuration) : base(configuration)
+        {
+        }
+
         public Guid EntryId { get; set; }
 
         protected override void ExecuteInternal()

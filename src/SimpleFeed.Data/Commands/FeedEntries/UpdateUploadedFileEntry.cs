@@ -3,11 +3,16 @@
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
+    using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
     using _Base;
 
     public class UpdateUploadedFileEntry : EfCommand
     {
+        public UpdateUploadedFileEntry(IConfiguration configuration) : base(configuration)
+        {
+        }
+
         public UploadedFileFeedEntry UploadedFileEntry { get; set; }
 
         protected override void ExecuteInternal()
