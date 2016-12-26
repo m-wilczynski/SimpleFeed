@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Core.FeedEntries.Base;
+    using EntityFramework.CommonOperations;
     using EntityFramework.EagerLoading;
     using Mappings.FeedEntries;
     using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@
     public class GetUserEntries : EfQuery<PaginatedResult<FeedEntryBase>>
     {
         public PaginationRequest PaginationRequest { get; set; }
+        public DateCreatedOrder? DateCreatedOrder { get; set; }
         public Guid UserIdentifier { get; set; }
 
         public GetUserEntries(IConfiguration configuration) : base(configuration)
@@ -24,6 +26,7 @@
         protected override PaginatedResult<FeedEntryBase> ExecuteInternal()
         {
             var query = Context.FeedEntries.AsNoTracking().Where(fe => fe.CreatorId.Equals(UserIdentifier));
+            query.OrderedByDateCreated(DateCreatedOrder);
 
             var totalPages = (uint)query.Count();
             var mappedResult = query.WithNavigationProperties()

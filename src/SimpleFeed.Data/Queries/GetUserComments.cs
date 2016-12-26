@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Core.Interactions;
+    using EntityFramework.CommonOperations;
     using EntityFramework.EagerLoading;
     using Mappings.Interactions;
     using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@
     public class GetUserComments : EfQuery<PaginatedResult<FeedEntryComment>>
     {
         public PaginationRequest PaginationRequest { get; set; }
+        public DateCreatedOrder? DateCreatedOrder { get; set; }
         public Guid UserIdentifier { get; set; }
 
         public GetUserComments(IConfiguration configuration) : base(configuration)
@@ -24,6 +26,7 @@
         protected override PaginatedResult<FeedEntryComment> ExecuteInternal()
         {
             var query = Context.Comments.AsNoTracking().Where(fe => fe.CreatorId.Equals(UserIdentifier));
+            query.OrderedByDateCreated(DateCreatedOrder);
 
             var totalPages = (uint)query.Count();
             var mappedResult = query.WithNavigationProperties()

@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using Core.FeedEntries.Base;
+    using EntityFramework.CommonOperations;
     using EntityFramework.EagerLoading;
     using Mappings.FeedEntries;
     using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@
     public class GetAllEntries : EfQuery<PaginatedResult<FeedEntryBase>>
     {
         public PaginationRequest PaginationRequest { get; set; }
+        public DateCreatedOrder? DateCreatedOrder { get; set; }
 
         public GetAllEntries(IConfiguration configuration) : base(configuration)
         {
@@ -21,8 +23,11 @@
 
         protected override PaginatedResult<FeedEntryBase> ExecuteInternal()
         {
-            var totalPages = (uint)Context.FeedEntries.AsNoTracking().Count();
-            var mappedResult = Context.FeedEntries.AsNoTracking().WithNavigationProperties()
+            var query = Context.FeedEntries.AsNoTracking();
+            query.OrderedByDateCreated(DateCreatedOrder);
+
+            var totalPages = (uint)query.Count();
+            var mappedResult = query.WithNavigationProperties()
                 .Skip((int)((PaginationRequest.Page - 1) * PaginationRequest.PageSize)).Take((int)PaginationRequest.PageSize)
                 .Select(e => e.AsDomainModelResolved()).ToList();
 
