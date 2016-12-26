@@ -1,5 +1,6 @@
 ﻿namespace SimpleFeed.Data.Mappings.FeedEntries
 {
+    using System;
     using Core.FeedEntries.Base;
     using Entities.FeedEntries;
     using System.Linq;
@@ -46,6 +47,17 @@
             entity.Votes = model.Votes.Values.Select(v => v.AsEntity(entity)).ToList();
             entity.Comments = model.Comments.Values.Select(c => c.AsEntity(entity)).ToList();
             return entity;
+        }
+
+        public static FeedEntryBase AsDomainModelResolved(this FeedEntryEntity entity)
+        {
+            if (entity is ExternalLinkFeedEntryEntity)
+                return ((ExternalLinkFeedEntryEntity) entity).AsDomainModel();
+            if (entity is UploadedFileFeedEntryEntity)
+                return ((UploadedFileFeedEntryEntity) entity).AsDomainModel();
+            if (entity is UploadedTextFeedEntryEntity)
+                return ((UploadedTextFeedEntryEntity) entity).AsDomainModel();
+            throw new InvalidOperationException($"Mapping for {entity.GetType()} is not defined");
         }
     }
 }

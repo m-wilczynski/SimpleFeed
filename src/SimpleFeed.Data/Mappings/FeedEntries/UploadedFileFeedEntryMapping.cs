@@ -6,7 +6,7 @@
 
     internal static class UploadedFileFeedEntryMapping
     {
-        public static UploadedFileFeedEntry AsDomain(this UploadedFileFeedEntryEntity entity)
+        public static UploadedFileFeedEntry AsDomainModel(this UploadedFileFeedEntryEntity entity)
         {
             var entry = new UploadedFileFeedEntry(new Uri(entity.RelativeFilePath), entity.CreatorId.Value, entity.Id);
             entry.WithVotesAndCommentsWired(entity)

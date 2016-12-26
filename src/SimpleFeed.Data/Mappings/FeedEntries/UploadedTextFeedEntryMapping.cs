@@ -5,7 +5,7 @@
 
     internal static class UploadedTextFeedEntryMapping
     {
-        public static UploadedTextFeedEntry AsDomain(this UploadedTextFeedEntryEntity entity)
+        public static UploadedTextFeedEntry AsDomainModel(this UploadedTextFeedEntryEntity entity)
         {
             var entry = new UploadedTextFeedEntry(entity.Content, entity.CreatorId.Value, entity.Id);
             entry.WithVotesAndCommentsWired(entity)

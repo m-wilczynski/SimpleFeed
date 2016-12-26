@@ -6,7 +6,7 @@
 
     internal static class ExternalLinkFeedEntryMapping
     {
-        public static ExternalLinkFeedEntry AsDomain(this ExternalLinkFeedEntryEntity entity)
+        public static ExternalLinkFeedEntry AsDomainModel(this ExternalLinkFeedEntryEntity entity)
         {
             var entry = new ExternalLinkFeedEntry(new Uri(entity.LinkAddress), entity.CreatorId.Value, entity.Id);
             entry.WithVotesAndCommentsWired(entity)
