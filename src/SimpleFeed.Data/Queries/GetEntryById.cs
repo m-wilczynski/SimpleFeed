@@ -6,14 +6,13 @@
     using Core.FeedEntries.Base;
     using EntityFramework.EagerLoading;
     using Mappings.FeedEntries;
-    using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
 
     public class GetEntryById : EfQuery<FeedEntryBase>
     {
         public Guid EntryId { get; set; }
 
-        public GetEntryById(IConfiguration configuration) : base(configuration)
+        public GetEntryById(string mySqlConnectionString) : base(mySqlConnectionString)
         {
         }
 

@@ -4,12 +4,11 @@
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
-    using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
 
     public class AddUploadedImageEntry : EfCommand
     {
-        public AddUploadedImageEntry(IConfiguration configuration) : base(configuration)
+        public AddUploadedImageEntry(string mySqlConnectionString) : base(mySqlConnectionString)
         {
         }
 

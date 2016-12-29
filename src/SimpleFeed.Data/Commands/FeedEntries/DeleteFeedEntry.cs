@@ -4,12 +4,11 @@
     using Base;
     using Core.FeedEntries.Base;
     using EntityFramework.CommonOperations;
-    using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
 
     public class DeleteFeedEntry<TEntry> : EfCommand where TEntry : FeedEntryBase
     {
-        public DeleteFeedEntry(IConfiguration configuration) : base(configuration)
+        public DeleteFeedEntry(string mySqlConnectionString) : base(mySqlConnectionString)
         {
         }
 

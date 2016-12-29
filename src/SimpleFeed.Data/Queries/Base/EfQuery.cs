@@ -1,24 +1,23 @@
 ﻿namespace SimpleFeed.Data.Queries.Base
 {
-    using Microsoft.Extensions.Configuration;
     using OperationResults;
     using OperationResults.ValidationResults;
 
     public abstract class EfQuery<TOutput>
     {
         internal SimpleFeedContext Context;
-        internal readonly IConfiguration Configuration;
+        internal readonly string MySqlConnectionString;
 
-        protected EfQuery(IConfiguration configuration)
+        protected EfQuery(string mySqlConnectionString)
         {
-            Configuration = configuration;
+            MySqlConnectionString = mySqlConnectionString;
         }
 
         public bool LoadNavigationProperties { get; set; } = true;
 
         public PersistenceOperationResult<TOutput> Execute()
         {
-            using (Context = new SimpleFeedContext(Configuration))
+            using (Context = new SimpleFeedContext(MySqlConnectionString))
             {
                 var validationResult = Validate();
                 if (!validationResult.WasSuccessful) return new PersistenceOperationResult<TOutput>(default(TOutput), validationResult);

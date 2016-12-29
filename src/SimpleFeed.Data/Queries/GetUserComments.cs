@@ -8,7 +8,6 @@
     using EntityFramework.EagerLoading;
     using Mappings.Interactions;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
     using OperationInputs;
     using OperationResults;
     using OperationResults.ValidationResults;
@@ -19,7 +18,7 @@
         public DateCreatedOrder? DateCreatedOrder { get; set; }
         public Guid UserIdentifier { get; set; }
 
-        public GetUserComments(IConfiguration configuration) : base(configuration)
+        public GetUserComments(string mySqlConnectionString) : base(mySqlConnectionString)
         {
         }
 

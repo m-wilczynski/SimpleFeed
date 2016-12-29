@@ -7,7 +7,6 @@
     using EntityFramework.EagerLoading;
     using Mappings.FeedEntries;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
     using OperationInputs;
     using OperationResults;
     using OperationResults.ValidationResults;
@@ -17,7 +16,7 @@
         public PaginationRequest PaginationRequest { get; set; }
         public DateCreatedOrder? DateCreatedOrder { get; set; }
 
-        public GetAllEntries(IConfiguration configuration) : base(configuration)
+        public GetAllEntries(string mySqlConnectionString) : base(mySqlConnectionString)
         {
         }
 

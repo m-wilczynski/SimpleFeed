@@ -4,20 +4,20 @@ namespace SimpleFeed.Data
     using System.Reflection;
     using Entities.FeedEntries;
     using Entities.Interactions;
-    using EntityFramework.EntityConfigurations.FeedEntries;
-    using EntityFramework.EntityConfigurations.Interactions;
+    using EntityFramework.EntityMySqlConnectionStrings.FeedEntries;
+    using EntityFramework.EntityMySqlConnectionStrings.Interactions;
     using Core.User;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
+    using Newtonsoft.Json;
 
     public class SimpleFeedContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
-        private readonly IConfiguration _configuration;
+        private readonly string _mySqlConnectionString;
 
-        public SimpleFeedContext(IConfiguration configuration)
+        public SimpleFeedContext(string mySqlConnectionString)
         {
-            _configuration = configuration;
+            _mySqlConnectionString = mySqlConnectionString;
         }
 
         internal DbSet<FeedEntryEntity> FeedEntries { get; set; }
@@ -28,7 +28,7 @@ namespace SimpleFeed.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(_configuration.GetConnectionString("DefaultConnection"),
+            optionsBuilder.UseMySql(_mySqlConnectionString,
                 b => b.MigrationsAssembly(typeof(SimpleFeedContext).GetTypeInfo().Assembly.FullName));
         }
 
@@ -37,9 +37,9 @@ namespace SimpleFeed.Data
             base.OnModelCreating(builder);
             
             builder.Entity<FeedEntryEntity>().HasFeedEntryConfig();
-            builder.Entity<ExternalLinkFeedEntryEntity>().HasExternalLinkConfiguration();
-            builder.Entity<UploadedImageFeedEntryEntity>().HasUploadedImageConfiguration();
-            builder.Entity<UploadedTextFeedEntryEntity>().HasUploadedTextConfiguration();
+            builder.Entity<ExternalLinkFeedEntryEntity>().HasExternalLinkMySqlConnectionString();
+            builder.Entity<UploadedImageFeedEntryEntity>().HasUploadedImageMySqlConnectionString();
+            builder.Entity<UploadedTextFeedEntryEntity>().HasUploadedTextMySqlConnectionString();
             builder.Entity<FeedEntryCommentEntity>().HasFeedEntryCommentConfig();
             builder.Entity<FeedEntryVoteEntity>().HasFeedEntryVoteConfig();
             builder.Entity<CommentVoteEntity>().HasCommentVoteConfig();

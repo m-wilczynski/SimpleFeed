@@ -7,15 +7,18 @@ namespace SimpleFeed.Controllers
     using Core.User;
     using Data.Commands.FeedEntries;
     using Data.Queries;
+    using Data.Storage;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Options;
     using Models.FeedViewModels;
+    using _Configuration;
 
     public class FeedController : BaseController
     {
-        public FeedController(IConfiguration configuration, UserManager<ApplicationUser> userManager) : base(configuration, userManager)
+        public FeedController(IOptions<PersistenceConfiguration> configuration, UserManager<ApplicationUser> userManager) 
+            : base(configuration, userManager)
         {
         }
 
@@ -30,7 +33,7 @@ namespace SimpleFeed.Controllers
         {
             if (entryId.Equals(Guid.Empty)) return BadRequest();
 
-            var entry = new GetEntryById(Configuration)
+            var entry = new GetEntryById(Configuration.Value.DefaultConnection)
             {
                 EntryId = entryId
             }.Execute();
@@ -53,7 +56,7 @@ namespace SimpleFeed.Controllers
             if (!ModelState.IsValid) return RedirectToAction(nameof(AddExternalLinkForm));
 
             var user = await UserManager.GetUserAsync(HttpContext.User);
-            var command = new AddExternalLinkEntry(Configuration)
+            var command = new AddExternalLinkEntry(Configuration.Value.DefaultConnection)
             {
                 ExternalLink = new ExternalLinkFeedEntry(new Uri(viewModel.LinkAddress), user.Id)
             };
@@ -69,7 +72,7 @@ namespace SimpleFeed.Controllers
         public IActionResult AddUploadedImageForm()
         {
             return View();
-        }
+        }       
 
         [Authorize]
         [HttpPost]
@@ -79,9 +82,16 @@ namespace SimpleFeed.Controllers
             if (!ModelState.IsValid) return RedirectToAction(nameof(AddUploadedImageForm));
 
             var user = await UserManager.GetUserAsync(HttpContext.User);
-            var command = new AddUploadedImageEntry(Configuration)
+
+            var uploadedFilePath = await new StoreUploadedFeedImage(Configuration.Value)
             {
-                UploadedImageEntry = new UploadedImageFeedEntry(new Uri(""), user.Id)
+                UserId = user.Id,
+                File = viewModel.Image
+            }.ExecuteAsync();
+
+            var command = new AddUploadedImageEntry(Configuration.Value.DefaultConnection)
+            {
+                UploadedImageEntry = new UploadedImageFeedEntry(new Uri(uploadedFilePath), user.Id)
             };
             var result = command.Execute();
 

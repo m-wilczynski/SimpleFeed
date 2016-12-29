@@ -4,12 +4,11 @@
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
-    using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
 
     public class UpdateUploadedTextEntry : EfCommand
     {
-        public UpdateUploadedTextEntry(IConfiguration configuration) : base(configuration)
+        public UpdateUploadedTextEntry(string mySqlConnectionString) : base(mySqlConnectionString)
         {
         }
 

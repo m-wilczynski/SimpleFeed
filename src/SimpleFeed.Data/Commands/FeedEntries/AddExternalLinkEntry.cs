@@ -4,12 +4,11 @@
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
-    using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
 
     public class AddExternalLinkEntry : EfCommand
     {
-        public AddExternalLinkEntry(IConfiguration configuration) : base(configuration)
+        public AddExternalLinkEntry(string mySqlConnectionString) : base(mySqlConnectionString)
         {
         }
 

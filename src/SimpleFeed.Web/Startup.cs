@@ -13,6 +13,8 @@ namespace SimpleFeed
     using System;
     using System.Reflection;
     using Core.User;
+    using Data.Configuration;
+    using _Configuration;
 
     public class Startup
     {
@@ -50,7 +52,11 @@ namespace SimpleFeed
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddSingleton<IConfiguration>(Configuration);
+            services.Configure<PersistenceConfiguration>(Configuration.GetSection("PersistenceConfiguration"));
+            services.Configure<PersistenceConfiguration>(c =>
+            {
+                c.ContentRootPath = Configuration.Get<IHostingEnvironment>().ContentRootPath;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
