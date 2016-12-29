@@ -1,6 +1,7 @@
 ﻿namespace SimpleFeed.Data.Queries
 {
     using System.Linq;
+    using Base;
     using Core.FeedEntries.Base;
     using EntityFramework.CommonOperations;
     using EntityFramework.EagerLoading;
@@ -10,7 +11,6 @@
     using OperationInputs;
     using OperationResults;
     using OperationResults.ValidationResults;
-    using _Base;
 
     public class GetAllEntries : EfQuery<PaginatedResult<FeedEntryBase>>
     {

@@ -53,8 +53,8 @@
         {
             if (entity is ExternalLinkFeedEntryEntity)
                 return ((ExternalLinkFeedEntryEntity) entity).AsDomainModel();
-            if (entity is UploadedFileFeedEntryEntity)
-                return ((UploadedFileFeedEntryEntity) entity).AsDomainModel();
+            if (entity is UploadedImageFeedEntryEntity)
+                return ((UploadedImageFeedEntryEntity) entity).AsDomainModel();
             if (entity is UploadedTextFeedEntryEntity)
                 return ((UploadedTextFeedEntryEntity) entity).AsDomainModel();
             throw new InvalidOperationException($"Mapping for {entity.GetType()} is not defined");

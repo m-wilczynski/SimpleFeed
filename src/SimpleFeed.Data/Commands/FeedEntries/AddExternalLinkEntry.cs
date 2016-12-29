@@ -1,15 +1,15 @@
 ﻿namespace SimpleFeed.Data.Commands.FeedEntries
 {
+    using Base;
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
     using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
-    using _Base;
 
-    public class AddExternalLinkCommand : EfCommand
+    public class AddExternalLinkEntry : EfCommand
     {
-        public AddExternalLinkCommand(IConfiguration configuration) : base(configuration)
+        public AddExternalLinkEntry(IConfiguration configuration) : base(configuration)
         {
         }
 

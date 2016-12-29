@@ -1,11 +1,11 @@
 ﻿namespace SimpleFeed.Data.Commands.FeedEntries
 {
+    using Base;
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
     using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
-    using _Base;
 
     public class AddUploadedTextEntry : EfCommand
     {

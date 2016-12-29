@@ -5,11 +5,11 @@ namespace SimpleFeed.Core.FeedEntries
     using Base;
     using Exceptions;
 
-    public class UploadedFileFeedEntry : FeedEntryBase
+    public class UploadedImageFeedEntry : FeedEntryBase
     {
         private Uri _relativeFilePath;
 
-        public UploadedFileFeedEntry(Uri relativeFilePath, Guid creatorId, Guid? id = default(Guid?)) : base(creatorId, id)
+        public UploadedImageFeedEntry(Uri relativeFilePath, Guid creatorId, Guid? id = default(Guid?)) : base(creatorId, id)
         {
             if (relativeFilePath == null)
                 throw new ArgumentNullException(nameof(relativeFilePath));

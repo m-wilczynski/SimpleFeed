@@ -1,4 +1,4 @@
-﻿namespace SimpleFeed.Data.Commands._Base
+﻿namespace SimpleFeed.Data.Commands.Base
 {
     using Microsoft.Extensions.Configuration;
     using OperationResults;
@@ -9,7 +9,7 @@
         internal SimpleFeedContext Context;
         internal readonly IConfiguration Configuration;
 
-        public EfCommand(IConfiguration configuration)
+        protected EfCommand(IConfiguration configuration)
         {
             Configuration = configuration;
         }

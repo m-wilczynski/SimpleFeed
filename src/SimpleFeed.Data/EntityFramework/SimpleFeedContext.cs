@@ -22,7 +22,7 @@ namespace SimpleFeed.Data
 
         internal DbSet<FeedEntryEntity> FeedEntries { get; set; }
         internal DbSet<ExternalLinkFeedEntryEntity> ExternalLinks { get; set; }
-        internal DbSet<UploadedFileFeedEntryEntity> UploadedFiles { get; set; }
+        internal DbSet<UploadedImageFeedEntryEntity> UploadedImages { get; set; }
         internal DbSet<UploadedTextFeedEntryEntity> UploadedTexts { get; set; }
         internal DbSet<FeedEntryCommentEntity> Comments { get; set; }
 
@@ -38,7 +38,7 @@ namespace SimpleFeed.Data
             
             builder.Entity<FeedEntryEntity>().HasFeedEntryConfig();
             builder.Entity<ExternalLinkFeedEntryEntity>().HasExternalLinkConfiguration();
-            builder.Entity<UploadedFileFeedEntryEntity>().HasUploadedFileConfiguration();
+            builder.Entity<UploadedImageFeedEntryEntity>().HasUploadedImageConfiguration();
             builder.Entity<UploadedTextFeedEntryEntity>().HasUploadedTextConfiguration();
             builder.Entity<FeedEntryCommentEntity>().HasFeedEntryCommentConfig();
             builder.Entity<FeedEntryVoteEntity>().HasFeedEntryVoteConfig();

@@ -2,7 +2,7 @@
 {
     using System;
 
-    internal class UploadedFileFeedEntryEntity : FeedEntryEntity
+    internal class UploadedImageFeedEntryEntity : FeedEntryEntity
     {
         public string RelativeFilePath { get; set; }
     }

@@ -1,11 +1,11 @@
 ﻿namespace SimpleFeed.Data.Commands.FeedEntries
 {
     using System;
+    using Base;
     using Core.FeedEntries.Base;
     using EntityFramework.CommonOperations;
     using Microsoft.Extensions.Configuration;
     using OperationResults.ValidationResults;
-    using _Base;
 
     public class DeleteFeedEntry<TEntry> : EfCommand where TEntry : FeedEntryBase
     {

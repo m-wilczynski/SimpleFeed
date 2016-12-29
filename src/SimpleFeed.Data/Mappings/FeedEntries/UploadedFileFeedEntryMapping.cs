@@ -4,19 +4,19 @@
     using Core.FeedEntries;
     using Entities.FeedEntries;
 
-    internal static class UploadedFileFeedEntryMapping
+    internal static class UploadedImageFeedEntryMapping
     {
-        public static UploadedFileFeedEntry AsDomainModel(this UploadedFileFeedEntryEntity entity)
+        public static UploadedImageFeedEntry AsDomainModel(this UploadedImageFeedEntryEntity entity)
         {
-            var entry = new UploadedFileFeedEntry(new Uri(entity.RelativeFilePath), entity.CreatorId.Value, entity.Id);
+            var entry = new UploadedImageFeedEntry(new Uri(entity.RelativeFilePath), entity.CreatorId.Value, entity.Id);
             entry.WithVotesAndCommentsWired(entity)
                  .WithCreationDateInjected(entity.CreationDate);
             return entry;
         }
 
-        public static UploadedFileFeedEntryEntity AsEntity(this UploadedFileFeedEntry model)
+        public static UploadedImageFeedEntryEntity AsEntity(this UploadedImageFeedEntry model)
         {
-            var entity = new UploadedFileFeedEntryEntity
+            var entity = new UploadedImageFeedEntryEntity
             {
                 Id = model.Id,
                 CreatorId = model.Creator.Value,

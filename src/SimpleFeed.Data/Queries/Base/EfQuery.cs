@@ -1,4 +1,4 @@
-﻿namespace SimpleFeed.Data.Queries._Base
+﻿namespace SimpleFeed.Data.Queries.Base
 {
     using Microsoft.Extensions.Configuration;
     using OperationResults;
@@ -9,7 +9,7 @@
         internal SimpleFeedContext Context;
         internal readonly IConfiguration Configuration;
 
-        public EfQuery(IConfiguration configuration)
+        protected EfQuery(IConfiguration configuration)
         {
             Configuration = configuration;
         }

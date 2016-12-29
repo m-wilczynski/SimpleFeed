@@ -13,7 +13,7 @@
             entityBuilder.Property(e => e.LinkAddress).IsRequired().HasColumnName("link_uri");
         }
 
-        public static void HasUploadedFileConfiguration(this EntityTypeBuilder<UploadedFileFeedEntryEntity> entityBuilder)
+        public static void HasUploadedImageConfiguration(this EntityTypeBuilder<UploadedImageFeedEntryEntity> entityBuilder)
         {
             entityBuilder.Property(e => e.RelativeFilePath).IsRequired().HasColumnName("relative_file_path");
         }

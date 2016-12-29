@@ -289,7 +289,7 @@ namespace SimpleFeed.Data.Migrations
                     b.HasDiscriminator().HasValue("ExternalLinkFeedEntryEntity");
                 });
 
-            modelBuilder.Entity("SimpleFeed.Data.Entities.FeedEntries.UploadedFileFeedEntryEntity", b =>
+            modelBuilder.Entity("SimpleFeed.Data.Entities.FeedEntries.UploadedImageFeedEntryEntity", b =>
                 {
                     b.HasBaseType("SimpleFeed.Data.Entities.FeedEntries.FeedEntryEntity");
 
@@ -297,9 +297,9 @@ namespace SimpleFeed.Data.Migrations
                         .IsRequired()
                         .HasColumnName("relative_file_path");
 
-                    b.ToTable("UploadedFileFeedEntryEntity");
+                    b.ToTable("UploadedImageFeedEntryEntity");
 
-                    b.HasDiscriminator().HasValue("UploadedFileFeedEntryEntity");
+                    b.HasDiscriminator().HasValue("UploadedImageFeedEntryEntity");
                 });
 
             modelBuilder.Entity("SimpleFeed.Data.Entities.FeedEntries.UploadedTextFeedEntryEntity", b =>

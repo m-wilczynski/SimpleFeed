@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using Base;
     using Core.Interactions;
     using EntityFramework.CommonOperations;
     using EntityFramework.EagerLoading;
@@ -11,7 +12,6 @@
     using OperationInputs;
     using OperationResults;
     using OperationResults.ValidationResults;
-    using _Base;
 
     public class GetUserComments : EfQuery<PaginatedResult<FeedEntryComment>>
     {
