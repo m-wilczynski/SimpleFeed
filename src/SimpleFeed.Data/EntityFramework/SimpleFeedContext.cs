@@ -2,11 +2,12 @@ namespace SimpleFeed.Data
 {
     using System;
     using System.Reflection;
+    using Configuration;
     using Entities.FeedEntries;
     using Entities.Interactions;
-    using EntityFramework.EntityMySqlConnectionStrings.FeedEntries;
-    using EntityFramework.EntityMySqlConnectionStrings.Interactions;
     using Core.User;
+    using EntityFramework.EntityConfigurations.FeedEntries;
+    using EntityFramework.EntityConfigurations.Interactions;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Newtonsoft.Json;
@@ -17,7 +18,16 @@ namespace SimpleFeed.Data
 
         public SimpleFeedContext(string mySqlConnectionString)
         {
+            if (string.IsNullOrEmpty(mySqlConnectionString))
+                throw new ArgumentNullException(nameof(mySqlConnectionString));
             _mySqlConnectionString = mySqlConnectionString;
+        }
+
+        public SimpleFeedContext(IPersistenceConfiguration persistenceConfiguration)
+        {
+            if (persistenceConfiguration == null)
+                throw new ArgumentNullException(nameof(persistenceConfiguration));
+            _mySqlConnectionString = persistenceConfiguration.DefaultConnection;
         }
 
         internal DbSet<FeedEntryEntity> FeedEntries { get; set; }
@@ -37,9 +47,9 @@ namespace SimpleFeed.Data
             base.OnModelCreating(builder);
             
             builder.Entity<FeedEntryEntity>().HasFeedEntryConfig();
-            builder.Entity<ExternalLinkFeedEntryEntity>().HasExternalLinkMySqlConnectionString();
-            builder.Entity<UploadedImageFeedEntryEntity>().HasUploadedImageMySqlConnectionString();
-            builder.Entity<UploadedTextFeedEntryEntity>().HasUploadedTextMySqlConnectionString();
+            builder.Entity<ExternalLinkFeedEntryEntity>().HasExternalLinkConfiguration();
+            builder.Entity<UploadedImageFeedEntryEntity>().HasUploadedImageConfiguration();
+            builder.Entity<UploadedTextFeedEntryEntity>().HasUploadedTextConfiguration();
             builder.Entity<FeedEntryCommentEntity>().HasFeedEntryCommentConfig();
             builder.Entity<FeedEntryVoteEntity>().HasFeedEntryVoteConfig();
             builder.Entity<CommentVoteEntity>().HasCommentVoteConfig();

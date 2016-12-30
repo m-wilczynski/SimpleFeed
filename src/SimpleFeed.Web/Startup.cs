@@ -11,10 +11,13 @@ using SimpleFeed.Services;
 namespace SimpleFeed
 {
     using System;
+    using System.Linq;
     using System.Reflection;
     using Core.User;
     using Data.Configuration;
+    using Microsoft.Extensions.Options;
     using _Configuration;
+    using _IoC;
 
     public class Startup
     {
@@ -55,8 +58,9 @@ namespace SimpleFeed
             services.Configure<PersistenceConfiguration>(Configuration.GetSection("PersistenceConfiguration"));
             services.Configure<PersistenceConfiguration>(c =>
             {
-                c.ContentRootPath = Configuration.Get<IHostingEnvironment>().ContentRootPath;
+                c.ContentRootPath = services.GetSingletonInstance<IHostingEnvironment>().ContentRootPath;
             });
+            services.AddTransient(typeof(IPersistenceConfiguration), c => c.GetService<IOptions<PersistenceConfiguration>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

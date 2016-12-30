@@ -1,24 +1,24 @@
-﻿namespace SimpleFeed.Data.EntityFramework.EntityMySqlConnectionStrings.FeedEntries
+﻿namespace SimpleFeed.Data.EntityFramework.EntityConfigurations.FeedEntries
 {
     using Entities.FeedEntries;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal static class FeedEntriesMySqlConnectionString
+    internal static class FeedEntriesConfiguration
     {
 
-        public static void HasExternalLinkMySqlConnectionString(this EntityTypeBuilder<ExternalLinkFeedEntryEntity> entityBuilder)
+        public static void HasExternalLinkConfiguration(this EntityTypeBuilder<ExternalLinkFeedEntryEntity> entityBuilder)
         {
             entityBuilder.Property(e => e.LinkAddress).IsRequired().HasColumnName("link_uri");
         }
 
-        public static void HasUploadedImageMySqlConnectionString(this EntityTypeBuilder<UploadedImageFeedEntryEntity> entityBuilder)
+        public static void HasUploadedImageConfiguration(this EntityTypeBuilder<UploadedImageFeedEntryEntity> entityBuilder)
         {
             entityBuilder.Property(e => e.RelativeFilePath).IsRequired().HasColumnName("relative_file_path");
         }
 
-        public static void HasUploadedTextMySqlConnectionString(this EntityTypeBuilder<UploadedTextFeedEntryEntity> entityBuilder)
+        public static void HasUploadedTextConfiguration(this EntityTypeBuilder<UploadedTextFeedEntryEntity> entityBuilder)
         {
             entityBuilder.Property(e => e.Content).IsRequired().HasColumnName("text_content");
         }

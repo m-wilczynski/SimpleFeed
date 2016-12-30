@@ -1,11 +1,11 @@
-﻿namespace SimpleFeed.Data.EntityFramework.EntityMySqlConnectionStrings.Interactions
+﻿namespace SimpleFeed.Data.EntityFramework.EntityConfigurations.Interactions
 {
     using Entities.Interactions;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal static class InteractionsMySqlConnectionString
+    internal static class InteractionsConfiguration
     {
         public static void HasFeedEntryCommentConfig(this EntityTypeBuilder<FeedEntryCommentEntity> entityBuilder)
         {

@@ -1,10 +1,10 @@
-﻿namespace SimpleFeed.Data.EntityFramework.EntityMySqlConnectionStrings
+﻿namespace SimpleFeed.Data.EntityFramework.EntityConfigurations
 {
     using Entities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    internal static class EntityMySqlConnectionString
+    internal static class EntityConfiguration
     {
         public static void HasBaseEntityConfig<TEntity>(this EntityTypeBuilder<TEntity> entityBuilder)
             where TEntity : EntityBase
