@@ -9,24 +9,31 @@
         <link rel="stylesheet" href="~/css/site.css" />
     </head>
     <body>
-        <div>
-            <div>
-                <div>
-                    <a asp-controller="Home" asp-action="Index">SimpleFeed</a>
-                </div>
-                <div>
-                    <ul>
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    </ul>
-                    @await Html.PartialAsync("_LoginPartial")
-                </div>
+        <div id="navigation">
+            <div id="navigation-container">
+                <ul id="logo-container">
+                    <li>
+                        <a asp-controller="Home" asp-action="Index">
+                            <img id="logo" src="~/images/logo.png"/>
+                        </a>
+                    </li>
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
+                <ul>
+                    <li>
+                        <a asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" asp-action="About">About</a>
+                    </li>
+                    <li>
+                        <a asp-controller="Home" asp-action="Contact">Contact</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div>
+        <div id="content-container">
             @RenderBody()
-            <hr />
             <footer>
                 <p>&copy; 2016 - SimpleFeed</p>
             </footer>

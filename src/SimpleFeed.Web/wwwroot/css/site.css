@@ -1,44 +1,91 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿/* CSS reset */
+
+ul, li, a, img, body, footer {
+    padding: 0;
+    margin: 0;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+
+/* General tags */
+
+* {
+    font-family: 'Titillium Web', sans-serif;
+    color: rgba(59, 72, 176, 1);
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 300px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+
+/* Navigation */
+
+#navigation {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    padding: 10px 0;
+    -webkit-box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.75);
+    box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.75);
 }
 
-/* buttons and links extension to use brackets: [ click me ] */
-.btn-bracketed::before {
-    display:inline-block;
-    content: "[";
-    padding-right: 0.5em;
-}
-.btn-bracketed::after {
-    display:inline-block;
-    content: "]";
-    padding-left: 0.5em;
+#navigation-container {
+    margin: 0 15%;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
+#navigation ul {
+    height: 64px;
+    float: right;
+    margin: 0 15px;
+}
+
+#navigation li {
+    float: left;
+    margin-left: 10px;
+    padding: 0 5px;
+    list-style: none;
+    line-height: 62px;
+}
+
+#navigation li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: rgba(59, 72, 176, 1);
+}
+
+#navigation li a:visited {
+    color: rgba(59, 72, 176, 1);
+}
+
+#logo {
+    max-height: 64px;
+    float: left;
+}
+
+ul#logo-container {
+    float: left;
+}
+
+#navigation .logon-nav {
+    border-left: 1px solid rgb(110, 118, 177);
+    padding-left: 15px;
+}
+
+#logon-nav-avatar {
+    max-height: 48px;
+    padding: 5px 10px 5px 0;
+    float: left;
+}
+
+
+/* Content */
+
+#content-container {
+    max-width: 70%;
+    padding: 35px 17.5%;
+    margin: 94px auto 0 auto;
+    position: relative;
 }
