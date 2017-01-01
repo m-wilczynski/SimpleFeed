@@ -173,8 +173,7 @@ namespace SimpleFeed.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("binary(16)");
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnName("creation_date");
@@ -200,8 +199,7 @@ namespace SimpleFeed.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("binary(16)");
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnName("creation_date");
@@ -227,8 +225,7 @@ namespace SimpleFeed.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("binary(16)");
+                        .HasColumnName("id");
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -254,8 +251,7 @@ namespace SimpleFeed.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("binary(16)");
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnName("creation_date");

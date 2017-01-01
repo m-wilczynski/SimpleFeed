@@ -33,7 +33,7 @@ namespace SimpleFeed.Controllers
         {
             if (entryId.Equals(Guid.Empty)) return BadRequest();
 
-            var entry = new GetEntryById(Configuration.Value.DefaultConnection)
+            var entry = new GetEntryById(Configuration.Value)
             {
                 EntryId = entryId
             }.Execute();
@@ -56,7 +56,7 @@ namespace SimpleFeed.Controllers
             if (!ModelState.IsValid) return RedirectToAction(nameof(AddExternalLinkForm));
 
             var user = await UserManager.GetUserAsync(HttpContext.User);
-            var command = new AddExternalLinkEntry(Configuration.Value.DefaultConnection)
+            var command = new AddExternalLinkEntry(Configuration.Value)
             {
                 ExternalLink = new ExternalLinkFeedEntry(new Uri(viewModel.LinkAddress), user.Id)
             };
@@ -86,12 +86,12 @@ namespace SimpleFeed.Controllers
             var uploadedFilePath = await new StoreUploadedFeedImage(Configuration.Value)
             {
                 UserId = user.Id,
-                File = viewModel.Image
+                Image = viewModel.Image
             }.ExecuteAsync();
 
-            var command = new AddUploadedImageEntry(Configuration.Value.DefaultConnection)
+            var command = new AddUploadedImageEntry(Configuration.Value)
             {
-                UploadedImageEntry = new UploadedImageFeedEntry(new Uri(uploadedFilePath), user.Id)
+                UploadedImageEntry = new UploadedImageFeedEntry(uploadedFilePath, user.Id)
             };
             var result = command.Execute();
 

@@ -67,7 +67,7 @@ namespace SimpleFeed.Data.Migrations
                 name: "feed_entry",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    id = table.Column<Guid>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
                     creation_date = table.Column<DateTime>(nullable: false),
                     creator_id = table.Column<Guid>(nullable: true),
@@ -172,7 +172,7 @@ namespace SimpleFeed.Data.Migrations
                 name: "feed_entry_comment",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    id = table.Column<Guid>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
                     comment_content = table.Column<string>(nullable: false),
                     CommentedEntityId = table.Column<Guid>(nullable: false),
@@ -194,7 +194,7 @@ namespace SimpleFeed.Data.Migrations
                 name: "feed_entry_vote",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    id = table.Column<Guid>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
                     creation_date = table.Column<DateTime>(nullable: false),
                     creator_id = table.Column<Guid>(nullable: true),
@@ -216,7 +216,7 @@ namespace SimpleFeed.Data.Migrations
                 name: "feed_entry_comment_vote",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    id = table.Column<Guid>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
                     creation_date = table.Column<DateTime>(nullable: false),
                     creator_id = table.Column<Guid>(nullable: true),

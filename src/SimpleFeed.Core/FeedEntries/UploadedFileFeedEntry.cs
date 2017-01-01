@@ -2,34 +2,33 @@
 
 namespace SimpleFeed.Core.FeedEntries
 {
+    using System.IO;
     using Base;
     using Exceptions;
 
     public class UploadedImageFeedEntry : FeedEntryBase
     {
-        private Uri _relativeFilePath;
+        private string _relativeFilePath;
 
-        public UploadedImageFeedEntry(Uri relativeFilePath, Guid creatorId, Guid? id = default(Guid?)) : base(creatorId, id)
+        public UploadedImageFeedEntry(string relativeFilePath, Guid creatorId, Guid? id = default(Guid?)) : base(creatorId, id)
         {
-            if (relativeFilePath == null)
-                throw new ArgumentNullException(nameof(relativeFilePath));
-            if (!ValidateFileAddress(relativeFilePath))
-                throw new InvalidUriException(relativeFilePath, "Invalid relative address of file");
+            RelativeFilePath = relativeFilePath;
         }
 
-        public Uri RelativeFilePath
+        public string RelativeFilePath
         {
             get { return _relativeFilePath; }
             set
             {
-                if (!ValidateFileAddress(value)) throw new InvalidUriException(value, "Invalid relative address of file");
+                if (!ValidateFileAddress(value)) throw new InvalidPathException(value, "Invalid relative address of file");
                 _relativeFilePath = value;
             }
         }
 
-        public static bool ValidateFileAddress(Uri link)
+        public static bool ValidateFileAddress(string path)
         {
-            return link != null && !link.IsAbsoluteUri;
+            return !string.IsNullOrEmpty(path) && Uri.IsWellFormedUriString(path, UriKind.Relative) &&
+                   !Path.IsPathRooted(path);
         }
     }
 }

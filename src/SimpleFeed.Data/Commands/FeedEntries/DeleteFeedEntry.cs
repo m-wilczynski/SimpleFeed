@@ -2,13 +2,14 @@
 {
     using System;
     using Base;
+    using Configuration;
     using Core.FeedEntries.Base;
     using EntityFramework.CommonOperations;
     using OperationResults.ValidationResults;
 
     public class DeleteFeedEntry<TEntry> : EfCommand where TEntry : FeedEntryBase
     {
-        public DeleteFeedEntry(string mySqlConnectionString) : base(mySqlConnectionString)
+        public DeleteFeedEntry(IPersistenceConfiguration configuration) : base(configuration)
         {
         }
 

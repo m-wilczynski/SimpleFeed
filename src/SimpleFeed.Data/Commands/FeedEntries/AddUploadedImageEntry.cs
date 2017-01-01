@@ -1,6 +1,7 @@
 ﻿namespace SimpleFeed.Data.Commands.FeedEntries
 {
     using Base;
+    using Configuration;
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
@@ -8,7 +9,7 @@
 
     public class AddUploadedImageEntry : EfCommand
     {
-        public AddUploadedImageEntry(string mySqlConnectionString) : base(mySqlConnectionString)
+        public AddUploadedImageEntry(IPersistenceConfiguration configuration) : base(configuration)
         {
         }
 

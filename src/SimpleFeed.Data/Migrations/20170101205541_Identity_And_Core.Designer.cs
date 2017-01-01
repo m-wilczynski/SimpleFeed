@@ -8,7 +8,7 @@ using SimpleFeed.Data;
 namespace SimpleFeed.Data.Migrations
 {
     [DbContext(typeof(SimpleFeedContext))]
-    [Migration("20161226205557_Identity_And_Core")]
+    [Migration("20170101205541_Identity_And_Core")]
     partial class Identity_And_Core
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -174,8 +174,7 @@ namespace SimpleFeed.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("binary(16)");
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnName("creation_date");
@@ -201,8 +200,7 @@ namespace SimpleFeed.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("binary(16)");
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnName("creation_date");
@@ -228,8 +226,7 @@ namespace SimpleFeed.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("binary(16)");
+                        .HasColumnName("id");
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -255,8 +252,7 @@ namespace SimpleFeed.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("binary(16)");
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnName("creation_date");

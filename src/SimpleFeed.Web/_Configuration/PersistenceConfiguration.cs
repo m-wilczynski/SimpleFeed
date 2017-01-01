@@ -11,11 +11,16 @@
         public string DefaultConnection { get; set; }
         public string ContentRootPath { get; set; }
 
-        public string GetPathForUserContent(Guid userId)
+        public string GetAbsolutePathForUserContent(Guid userId)
         {
-            return Path.Combine(ContentRootPath, ImageStoragePath, userId.ToString().Replace("-", ""), DateTime.Now.Year.ToString());
+            return Path.Combine(ContentRootPath, "wwwroot", ImageStoragePath, userId.ToString().Replace("-", ""), DateTime.Now.Year.ToString())
+                .Replace(@"\", "/");
         }
 
-
+        public string GetRelativePathForUserContent(Guid userId, RelativePathRoot root = RelativePathRoot.WebRoot)
+        {
+            return Path.Combine(root != RelativePathRoot.WebRoot ? "wwwroot" : "", ImageStoragePath, userId.ToString().Replace("-", ""), DateTime.Now.Year.ToString())
+                .Replace(@"\", "/");
+        }
     }
 }

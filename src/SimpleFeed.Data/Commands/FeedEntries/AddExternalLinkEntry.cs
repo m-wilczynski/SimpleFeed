@@ -1,6 +1,7 @@
 ﻿namespace SimpleFeed.Data.Commands.FeedEntries
 {
     using Base;
+    using Configuration;
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
@@ -8,7 +9,7 @@
 
     public class AddExternalLinkEntry : EfCommand
     {
-        public AddExternalLinkEntry(string mySqlConnectionString) : base(mySqlConnectionString)
+        public AddExternalLinkEntry(IPersistenceConfiguration configuration) : base(configuration)
         {
         }
 

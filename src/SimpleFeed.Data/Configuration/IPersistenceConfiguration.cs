@@ -9,6 +9,13 @@
         string DefaultConnection { get; set; }
         string ContentRootPath { get; set; }
 
-        string GetPathForUserContent(Guid userId);
+        string GetAbsolutePathForUserContent(Guid userId);
+        string GetRelativePathForUserContent(Guid userId, RelativePathRoot root = RelativePathRoot.WebRoot);
+    }
+
+    public enum RelativePathRoot
+    {
+        WebRoot,
+        ContentRoot
     }
 }

@@ -16,13 +16,6 @@ namespace SimpleFeed.Data
     {
         private readonly string _mySqlConnectionString;
 
-        public SimpleFeedContext(string mySqlConnectionString)
-        {
-            if (string.IsNullOrEmpty(mySqlConnectionString))
-                throw new ArgumentNullException(nameof(mySqlConnectionString));
-            _mySqlConnectionString = mySqlConnectionString;
-        }
-
         public SimpleFeedContext(IPersistenceConfiguration persistenceConfiguration)
         {
             if (persistenceConfiguration == null)

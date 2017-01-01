@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Base;
+    using Configuration;
     using Core.FeedEntries.Base;
     using EntityFramework.EagerLoading;
     using Mappings.FeedEntries;
@@ -10,11 +11,11 @@
 
     public class GetEntryById : EfQuery<FeedEntryBase>
     {
-        public Guid EntryId { get; set; }
-
-        public GetEntryById(string mySqlConnectionString) : base(mySqlConnectionString)
+        public GetEntryById(IPersistenceConfiguration configuration) : base(configuration)
         {
         }
+
+        public Guid EntryId { get; set; }
 
         protected override FeedEntryBase ExecuteInternal()
         {

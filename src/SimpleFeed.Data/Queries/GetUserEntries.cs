@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Base;
+    using Configuration;
     using Core.FeedEntries.Base;
     using EntityFramework.CommonOperations;
     using EntityFramework.EagerLoading;
@@ -14,13 +15,13 @@
 
     public class GetUserEntries : EfQuery<PaginatedResult<FeedEntryBase>>
     {
+        public GetUserEntries(IPersistenceConfiguration configuration) : base(configuration)
+        {
+        }
+
         public PaginationRequest PaginationRequest { get; set; }
         public DateCreatedOrder? DateCreatedOrder { get; set; }
         public Guid UserIdentifier { get; set; }
-
-        public GetUserEntries(string mySqlConnectionString) : base(mySqlConnectionString)
-        {
-        }
 
         protected override PaginatedResult<FeedEntryBase> ExecuteInternal()
         {

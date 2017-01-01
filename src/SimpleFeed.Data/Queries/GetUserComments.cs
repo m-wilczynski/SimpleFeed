@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Base;
+    using Configuration;
     using Core.Interactions;
     using EntityFramework.CommonOperations;
     using EntityFramework.EagerLoading;
@@ -14,13 +15,13 @@
 
     public class GetUserComments : EfQuery<PaginatedResult<FeedEntryComment>>
     {
+        public GetUserComments(IPersistenceConfiguration configuration) : base(configuration)
+        {
+        }
+
         public PaginationRequest PaginationRequest { get; set; }
         public DateCreatedOrder? DateCreatedOrder { get; set; }
         public Guid UserIdentifier { get; set; }
-
-        public GetUserComments(string mySqlConnectionString) : base(mySqlConnectionString)
-        {
-        }
 
         protected override PaginatedResult<FeedEntryComment> ExecuteInternal()
         {

@@ -11,6 +11,7 @@ ul, li, a, img, body, footer {
 * {
     font-family: 'Titillium Web', sans-serif;
     color: rgba(59, 72, 176, 1);
+    font-size: 13px;
 }
 
 input,
@@ -27,9 +28,9 @@ textarea {
     width: 100%;
     top: 0;
     padding: 10px 0;
-    -webkit-box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.75);
-    box-shadow: 0px 4px 20px -5px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 3px 8px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 3px 8px -5px rgba(0,0,0,0.75);
+    box-shadow: 0px 3px 8px -5px rgba(0,0,0,0.75);
 }
 
 #navigation-container {
@@ -75,8 +76,8 @@ ul#logo-container {
 }
 
 #logon-nav-avatar {
-    max-height: 48px;
-    padding: 5px 10px 5px 0;
+    max-height: 42px;
+    padding: 8px 10px 8px 0;
     float: left;
 }
 

@@ -1,6 +1,7 @@
 ﻿namespace SimpleFeed.Data.Commands.FeedEntries
 {
     using Base;
+    using Configuration;
     using Core.FeedEntries;
     using EntityFramework.CommonOperations;
     using Mappings.FeedEntries;
@@ -8,7 +9,7 @@
 
     public class UpdateUploadedTextEntry : EfCommand
     {
-        public UpdateUploadedTextEntry(string mySqlConnectionString) : base(mySqlConnectionString)
+        public UpdateUploadedTextEntry(IPersistenceConfiguration configuration) : base(configuration)
         {
         }
 

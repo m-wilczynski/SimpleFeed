@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using Base;
+    using Configuration;
     using Core.FeedEntries.Base;
     using EntityFramework.CommonOperations;
     using EntityFramework.EagerLoading;
@@ -13,12 +14,12 @@
 
     public class GetAllEntries : EfQuery<PaginatedResult<FeedEntryBase>>
     {
-        public PaginationRequest PaginationRequest { get; set; }
-        public DateCreatedOrder? DateCreatedOrder { get; set; }
-
-        public GetAllEntries(string mySqlConnectionString) : base(mySqlConnectionString)
+        public GetAllEntries(IPersistenceConfiguration configuration) : base(configuration)
         {
         }
+
+        public PaginationRequest PaginationRequest { get; set; }
+        public DateCreatedOrder? DateCreatedOrder { get; set; }
 
         protected override PaginatedResult<FeedEntryBase> ExecuteInternal()
         {

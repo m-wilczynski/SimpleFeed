@@ -8,7 +8,7 @@
     {
         public static UploadedImageFeedEntry AsDomainModel(this UploadedImageFeedEntryEntity entity)
         {
-            var entry = new UploadedImageFeedEntry(new Uri(entity.RelativeFilePath), entity.CreatorId.Value, entity.Id);
+            var entry = new UploadedImageFeedEntry(entity.RelativeFilePath, entity.CreatorId.Value, entity.Id);
             entry.WithVotesAndCommentsWired(entity)
                  .WithCreationDateInjected(entity.CreationDate);
             return entry;

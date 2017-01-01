@@ -9,12 +9,7 @@
 
         protected ModelBase(Guid? id = null)
         {
-            if (id.HasValue)
-            {
-                Id = id.Value;
-                return;
-            }
-            Id = Guid.NewGuid();
+            Id = id ?? Guid.NewGuid();
             CreationDate = DateTime.Now;
         }
 

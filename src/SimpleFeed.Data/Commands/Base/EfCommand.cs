@@ -1,21 +1,22 @@
 ﻿namespace SimpleFeed.Data.Commands.Base
 {
+    using Configuration;
     using OperationResults;
     using OperationResults.ValidationResults;
 
     public abstract class EfCommand<TOutput>
     {
+        protected readonly IPersistenceConfiguration Configuration;
         internal SimpleFeedContext Context;
-        internal readonly string MySqlConnectionString;
 
-        protected EfCommand(string mySqlConnectionString)
+        protected EfCommand(IPersistenceConfiguration configuration)
         {
-            MySqlConnectionString = mySqlConnectionString;
+            Configuration = configuration;           
         }
 
         public PersistenceOperationResult<TOutput> Execute()
         {
-            using (Context = new SimpleFeedContext(MySqlConnectionString))
+            using (Context = new SimpleFeedContext(Configuration))
             {
                 var validationResult = Validate();
                 if (!validationResult.WasSuccessful) return new PersistenceOperationResult<TOutput>(default(TOutput), validationResult);
@@ -31,16 +32,16 @@
     public abstract class EfCommand
     {
         internal SimpleFeedContext Context;
-        internal readonly string MySqlConnectionString;
+        protected readonly IPersistenceConfiguration Configuration;
 
-        public EfCommand(string mySqlConnectionString)
+        protected EfCommand(IPersistenceConfiguration configuration)
         {
-            MySqlConnectionString = mySqlConnectionString;
+            Configuration = configuration;
         }
 
         public PersistenceOperationResult Execute()
         {
-            using (Context = new SimpleFeedContext(MySqlConnectionString))
+            using (Context = new SimpleFeedContext(Configuration))
             {
                 var validationResult = Validate();
                 if (!validationResult.WasSuccessful) return new PersistenceOperationResult(validationResult);
