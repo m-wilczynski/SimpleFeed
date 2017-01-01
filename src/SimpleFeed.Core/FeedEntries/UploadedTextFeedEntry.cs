@@ -8,12 +8,9 @@
     {
         private string _content;
 
-        public UploadedTextFeedEntry(string content, Guid creatorId, Guid? id = default(Guid?)) : base(creatorId, id)
+        public UploadedTextFeedEntry(string content, string title, Guid creatorId, Guid? id = default(Guid?)) : base(title, creatorId, id)
         {
-            if (string.IsNullOrEmpty(content))
-                throw new ArgumentNullException(nameof(content));
-            if (!ValidateContent(content))
-                throw new InvalidEntryContentException(content, "Provided text content was invalid");
+            Content = content;
         }
 
         public string Content

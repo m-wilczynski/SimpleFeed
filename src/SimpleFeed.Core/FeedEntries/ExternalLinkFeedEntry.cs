@@ -9,12 +9,9 @@ namespace SimpleFeed.Core.FeedEntries
     {
         private Uri _linkAddress;
 
-        public ExternalLinkFeedEntry(Uri linkAddress, Guid creatorId, Guid? id = default(Guid?)) : base(creatorId, id)
+        public ExternalLinkFeedEntry(Uri linkAddress, string title, Guid creatorId, Guid? id = default(Guid?)) : base(title, creatorId, id)
         {
-            if (linkAddress == null)
-                throw new ArgumentNullException(nameof(linkAddress));
-            if (!ValidateLinkUri(linkAddress))
-                throw new InvalidUriException(linkAddress, "Invalid link address");
+            LinkAddress = linkAddress;
         }
 
         public Uri LinkAddress

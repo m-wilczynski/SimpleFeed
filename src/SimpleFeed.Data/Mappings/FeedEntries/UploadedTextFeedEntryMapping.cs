@@ -7,7 +7,7 @@
     {
         public static UploadedTextFeedEntry AsDomainModel(this UploadedTextFeedEntryEntity entity)
         {
-            var entry = new UploadedTextFeedEntry(entity.Content, entity.CreatorId.Value, entity.Id);
+            var entry = new UploadedTextFeedEntry(entity.Content, entity.Title, entity.CreatorId.Value, entity.Id);
             entry.WithVotesAndCommentsWired(entity)
                  .WithCreationDateInjected(entity.CreationDate);
             return entry;
@@ -21,6 +21,8 @@
                 CreatorId = model.Creator.Value,
                 CreationDate = model.CreationDate,
                 IsPublished = model.IsPublished,
+                Title = model.Title,
+                Description = model.Description,
                 Content = model.Content
             };
             entity.WithVotesAndCommentsWired(model);

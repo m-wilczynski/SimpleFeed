@@ -2,9 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.Extensions.FileProviders;
 
-    public class AddUploadedImageViewModel
+    public class AddUploadedImageViewModel : AddFeedEntryViewModel
     {
         [Required]
         public IFormFile Image { get; set; }

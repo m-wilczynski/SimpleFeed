@@ -10,7 +10,7 @@ namespace SimpleFeed.Core.FeedEntries
     {
         private string _relativeFilePath;
 
-        public UploadedImageFeedEntry(string relativeFilePath, Guid creatorId, Guid? id = default(Guid?)) : base(creatorId, id)
+        public UploadedImageFeedEntry(string relativeFilePath, string title, Guid creatorId, Guid? id = default(Guid?)) : base(title, creatorId, id)
         {
             RelativeFilePath = relativeFilePath;
         }

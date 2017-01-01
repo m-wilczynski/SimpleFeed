@@ -8,7 +8,7 @@
     {
         public static ExternalLinkFeedEntry AsDomainModel(this ExternalLinkFeedEntryEntity entity)
         {
-            var entry = new ExternalLinkFeedEntry(new Uri(entity.LinkAddress), entity.CreatorId.Value, entity.Id);
+            var entry = new ExternalLinkFeedEntry(new Uri(entity.LinkAddress), entity.Title, entity.CreatorId.Value, entity.Id);
             entry.WithVotesAndCommentsWired(entity)
                  .WithCreationDateInjected(entity.CreationDate);
             return entry;
@@ -22,6 +22,8 @@
                 CreatorId = model.Creator.Value,
                 CreationDate = model.CreationDate,
                 IsPublished = model.IsPublished,
+                Title = model.Title,
+                Description = model.Description,
                 LinkAddress = model.LinkAddress.ToString()
             };
             entity.WithVotesAndCommentsWired(model);

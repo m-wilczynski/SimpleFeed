@@ -6,18 +6,24 @@
 
     public abstract class FeedEntryBase : ModelBase
     {
+        public readonly string Title;
+
         private readonly Dictionary<Guid, FeedEntryComment> _comments = new Dictionary<Guid, FeedEntryComment>();
         private readonly Dictionary<Guid, FeedEntryVote> _votes = new Dictionary<Guid, FeedEntryVote>();
         private readonly HashSet<Guid> _voters = new HashSet<Guid>();
 
-        protected FeedEntryBase(Guid creatorId, Guid? id = null) : base(id)
+        protected FeedEntryBase(string title, Guid creatorId, Guid? id = null) : base(id)
         {
             if (creatorId.Equals(Guid.Empty))
                 throw new ArgumentNullException(nameof(creatorId));
+            if (string.IsNullOrEmpty(title))
+                throw new ArgumentNullException(nameof(title));
             Creator = creatorId;
+            Title = title;
         }
 
         public bool IsPublished { get; set; }
+        public string Description { get; set; }
 
         public Dictionary<Guid, FeedEntryComment> Comments => new Dictionary<Guid, FeedEntryComment>(_comments);
         public Dictionary<Guid, FeedEntryVote> Votes => new Dictionary<Guid, FeedEntryVote>(_votes);

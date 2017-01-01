@@ -38,7 +38,7 @@ namespace SimpleFeed.Controllers
                 EntryId = entryId
             }.Execute();
 
-            return View(entry);
+            return View(entry.Output);
         }
 
         [Authorize]
@@ -58,7 +58,7 @@ namespace SimpleFeed.Controllers
             var user = await UserManager.GetUserAsync(HttpContext.User);
             var command = new AddExternalLinkEntry(Configuration.Value)
             {
-                ExternalLink = new ExternalLinkFeedEntry(new Uri(viewModel.LinkAddress), user.Id)
+                ExternalLink = new ExternalLinkFeedEntry(new Uri(viewModel.LinkAddress), viewModel.Title, user.Id)
             };
             var result = command.Execute();
 
@@ -91,7 +91,7 @@ namespace SimpleFeed.Controllers
 
             var command = new AddUploadedImageEntry(Configuration.Value)
             {
-                UploadedImageEntry = new UploadedImageFeedEntry(uploadedFilePath, user.Id)
+                UploadedImageEntry = new UploadedImageFeedEntry(uploadedFilePath, viewModel.Title, user.Id)
             };
             var result = command.Execute();
 

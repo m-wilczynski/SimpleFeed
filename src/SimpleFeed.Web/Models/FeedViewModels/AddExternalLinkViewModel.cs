@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class AddExternalLinkViewModel
+    public class AddExternalLinkViewModel : AddFeedEntryViewModel
     {
         [Required]
         [RegularExpression(@"@^(https?)://[^\s/$.?#].[^\s]*$@iS")]
