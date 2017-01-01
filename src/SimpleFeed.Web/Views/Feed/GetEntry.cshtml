@@ -6,6 +6,8 @@
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<h2>@Model.Title</h2>
+<div>@Model.CreationDate</div>
+<div>@Model.Description</div>
 
 @Html.FeedEntryPartialFor(Model)

@@ -59,6 +59,9 @@ namespace SimpleFeed.Controllers
             var command = new AddExternalLinkEntry(Configuration.Value)
             {
                 ExternalLink = new ExternalLinkFeedEntry(new Uri(viewModel.LinkAddress), viewModel.Title, user.Id)
+                {
+                    Description = viewModel.Description
+                }
             };
             var result = command.Execute();
 
@@ -92,6 +95,9 @@ namespace SimpleFeed.Controllers
             var command = new AddUploadedImageEntry(Configuration.Value)
             {
                 UploadedImageEntry = new UploadedImageFeedEntry(uploadedFilePath, viewModel.Title, user.Id)
+                {
+                    Description = viewModel.Description
+                }
             };
             var result = command.Execute();
 

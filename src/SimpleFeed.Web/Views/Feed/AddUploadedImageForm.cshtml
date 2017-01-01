@@ -10,8 +10,14 @@
 <form method="post" enctype="multipart/form-data" asp-controller="Feed" asp-action="AddUploadedImage">
     <div>
         <div>
-            <p>Upload one or more files using this form:</p>
-            <input type="file" asp-for="Image" />
+            <p>Title:</p>
+            <input type="text" asp-for="Title" />
+            <p>Description:</p>
+            <input type="text" asp-for="Description" />
+        </div>
+        <div>
+            <p>Image to upload:</p>
+            <input type="file" asp-for="Image"/>
         </div>
     </div>
     <div>
