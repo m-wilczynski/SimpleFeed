@@ -7,7 +7,18 @@
 }
 
 <h2>@Model.Title</h2>
-<div>@Model.CreationDate</div>
+<div class="right">
+    <time class="timeago" datetime="@Model.CreationDate.ToString("s", System.Globalization.CultureInfo.InvariantCulture)">
+        @Model.CreationDate.ToString("d")
+    </time>
+</div>
 <div>@Model.Description</div>
 
 @Html.FeedEntryPartialFor(Model)
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded",
+        function() {
+            $("time.timeago").timeago();
+        });
+</script>

@@ -25,6 +25,20 @@ h2 {
     font-size: 32px;
 }
 
+img {
+    max-width: 100%;
+}
+
+/* Utils */
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
 
 /* Navigation */
 

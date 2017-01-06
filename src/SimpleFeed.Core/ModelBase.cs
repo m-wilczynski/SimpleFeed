@@ -13,7 +13,7 @@
             CreationDate = DateTime.Now;
         }
 
-        public DateTime CreationDate { get; }
+        public DateTime CreationDate { get; private set; }
 
         public Guid? Creator
         {
