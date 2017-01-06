@@ -14,8 +14,6 @@
             Configuration = configuration;
         }
 
-        public bool LoadNavigationProperties { get; set; } = true;
-
         public PersistenceOperationResult<TOutput> Execute()
         {
             using (Context = new SimpleFeedContext(Configuration))

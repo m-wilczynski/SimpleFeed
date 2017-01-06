@@ -6,6 +6,7 @@ namespace SimpleFeed.Controllers
     using Core.FeedEntries;
     using Core.User;
     using Data.Commands.FeedEntries;
+    using Data.OperationInputs;
     using Data.Queries;
     using Data.Storage;
     using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,13 @@ namespace SimpleFeed.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var entries = new GetAllEntries(Configuration.Value)
+            {
+                PaginationRequest = new PaginationRequest(1, 10),
+                DateCreatedOrder = DateCreatedOrder.Descending,
+            }.Execute();
+
+            return View(entries);
         }
 
         [HttpGet]

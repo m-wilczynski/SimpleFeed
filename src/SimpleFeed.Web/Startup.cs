@@ -89,7 +89,7 @@ namespace SimpleFeed
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Feed}/{action=Index}/{id?}");
             });
         }
     }

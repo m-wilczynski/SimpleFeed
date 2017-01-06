@@ -1,8 +1,21 @@
-﻿@model dynamic
+﻿@using SimpleFeed.Core.FeedEntries.Base
+@using SimpleFeed.Data.OperationResults
+@model PersistenceOperationResult<PaginatedResult<FeedEntryBase>>
 
 @{
-    ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+@{
+    if (!Model.WasSuccessful)
+    {
+        <p>Whoops, something went wrong!</p>
+    }
+    else
+    {
+        foreach (var result in Model.Output.Result)
+        {
+            @Html.Partial("_FeedIndexElementPartial", result)
+        }
+    }
+}

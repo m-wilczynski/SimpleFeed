@@ -8,7 +8,7 @@
     {
         public static IHtmlContent FeedEntryPartialFor(this IHtmlHelper helper, FeedEntryBase feedEntry)
         {
-            return helper.Partial(feedEntry.GetType().Name, helper.ViewData.Model, null);
+            return helper.Partial($"_{feedEntry.GetType().Name}Partial", feedEntry, null);
         }
     }
 }

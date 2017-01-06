@@ -1,11 +1,6 @@
 ﻿@using SimpleFeed.HtmlHelpers
 @model SimpleFeed.Core.FeedEntries.Base.FeedEntryBase
 
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
-
 <h2>@Model.Title</h2>
 <div class="right-text">
     <time class="timeago" datetime="@Model.CreationDate.ToString("s", System.Globalization.CultureInfo.InvariantCulture)">
