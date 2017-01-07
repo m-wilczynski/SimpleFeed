@@ -6,15 +6,25 @@
     Layout = "_Layout";
 }
 
-<div class="feed-entry-title">@Model.Model.Title</div>
-<div class="right-text">
-    <time class="timeago" datetime="@Model.Model.CreationDate.ToString("s", System.Globalization.CultureInfo.InvariantCulture)">
-        @Model.Model.CreationDate.ToString("d")
-    </time>
-</div>
-<div class="feed-entry-desc">@Model.Model.Description</div>
+<div class="feed-entry">
+    <div class="feed-entry-createdby">
+        <div class="feed-entry-author">
+            <img src="/images/user_default.png" /> @Model.Creator.UserName
+        </div>
+        <time class="timeago" datetime="@Model.Model.CreationDate.ToString("s", System.Globalization.CultureInfo.InvariantCulture)">
+            @Model.Model.CreationDate.ToString("d")
+        </time>
+    </div>
 
-@Html.FeedEntryPartialFor(Model.Model)
+    @Html.FeedEntryPartialFor(Model.Model)
+
+    <div class="feed-entry-title">
+        @Model.Model.Title
+    </div>
+    <div class="feed-entry-desc">
+        @Model.Model.Description
+    </div>
+</div>
 
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded",
