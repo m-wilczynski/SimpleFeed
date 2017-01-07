@@ -90,6 +90,10 @@
 
   "scripts": {
     "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ],
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+    "postpublish": [
+      "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%",
+      "cp -rf '%publish:OutputPath%\\web.config' '\\src\\SimpleFeed.Web'",
+      ".\\run-migrations.bat"
+    ]
   }
 }
