@@ -1,19 +1,17 @@
 ﻿@using SimpleFeed.HtmlHelpers
-@model SimpleFeed.Core.FeedEntries.Base.FeedEntryBase
+@model SimpleFeed.Data.OperationResults.ModelWithCreator<SimpleFeed.Core.FeedEntries.Base.FeedEntryBase>
 
-<h2>@Model.Title</h2>
-<div class="right-text">
-    <time class="timeago" datetime="@Model.CreationDate.ToString("s", System.Globalization.CultureInfo.InvariantCulture)">
-        @Model.CreationDate.ToString("d")
-    </time>
+<div class="feed-entry">
+    
+    <div class="feed-entry-header">
+        <div class="feed-entry-title">@Model.Model.Title</div>
+        <time class="timeago" datetime="@Model.Model.CreationDate.ToString("s", System.Globalization.CultureInfo.InvariantCulture)">
+            @Model.Model.CreationDate.ToString("d")
+        </time>
+    </div>
+
+    @Html.FeedEntryPartialFor(Model.Model)
+    
+    <div class="feed-entry-desc">@Model.Model.Description</div>
+
 </div>
-<div>@Model.Description</div>
-
-@Html.FeedEntryPartialFor(Model)
-
-<script type="text/javascript">
-    document.addEventListener("DOMContentLoaded",
-        function() {
-            $("time.timeago").timeago();
-        });
-</script>

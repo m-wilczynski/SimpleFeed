@@ -5,6 +5,7 @@
     using Entities.FeedEntries;
     using System.Linq;
     using Interactions;
+    using OperationResults;
 
     internal static class FeedEntryMapping
     {
@@ -58,6 +59,11 @@
             if (entity is UploadedTextFeedEntryEntity)
                 return ((UploadedTextFeedEntryEntity) entity).AsDomainModel();
             throw new InvalidOperationException($"Mapping for {entity.GetType()} is not defined");
+        }
+
+        public static ModelWithCreator<FeedEntryBase> AsDomainModelResolvedWithCreator(this FeedEntryEntity entity)
+        {
+            return new ModelWithCreator<FeedEntryBase>(entity.AsDomainModelResolved(), entity.Creator);
         }
     }
 }

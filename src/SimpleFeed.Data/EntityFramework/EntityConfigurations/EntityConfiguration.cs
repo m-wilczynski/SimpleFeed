@@ -13,6 +13,7 @@
             entityBuilder.Property(e => e.Id).IsRequired().HasColumnName("id");
             entityBuilder.Property(e => e.CreationDate).IsRequired().HasColumnName("creation_date");
             entityBuilder.Property(e => e.CreatorId).HasColumnName("creator_id");
+            entityBuilder.HasOne(e => e.Creator);
         }
     }
 }
