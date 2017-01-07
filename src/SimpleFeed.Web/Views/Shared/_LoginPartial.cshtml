@@ -7,12 +7,17 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
-        <ul class="logon-nav">
+        <ul id="logon-nav">
             <li>
-                <a asp-controller="Manage" asp-action="Index" title="Manage">
-                    <img id="logon-nav-avatar" src="~/images/user_default.png" />
-                    @UserManager.GetUserName(User)
-                </a>
+                <img id="logon-nav-avatar" src="~/images/user_default.png" />
+                <div id="logged-user">
+                    <a id="logged-user-name" asp-controller="Manage" asp-action="Index" title="Manage">
+                        @UserManager.GetUserName(User)
+                    </a>
+                    <div id="logged-user-email">
+                        @UserManager.GetUserAsync(@User).Result.Email
+                    </div>
+                </div>
             </li>
             <li>
                 <button type="submit">Log off</button>
@@ -22,7 +27,7 @@
 }
 else
 {
-    <ul class="logon-nav">
+    <ul id="logon-nav">
         <li><a asp-controller="Account" asp-action="Register">Register</a></li>
         <li><a asp-controller="Account" asp-action="Login">Log in</a></li>
     </ul>

@@ -10,7 +10,7 @@ ul, li, a, img, body, footer {
 
 * {
     font-family: 'Titillium Web', sans-serif;
-    color: rgba(59, 72, 176, 1);
+    color: rgb(37, 149, 255);
     font-size: 13px;
 }
 
@@ -28,6 +28,12 @@ h2 {
 
 img {
     max-width: 100%;
+}
+
+button {
+    background-color: white;
+    border-width: 0;
+    padding: 5px 10px;
 }
 
 /* Utils */
@@ -51,7 +57,6 @@ img {
     position: fixed;
     width: 100%;
     top: 0;
-    padding: 10px 0;
     z-index: 10;
     background-color: white;
     -webkit-box-shadow: 0px 3px 8px -5px rgba(0,0,0,0.75);
@@ -71,7 +76,7 @@ img {
 
 #navigation li {
     float: left;
-    margin-left: 10px;
+    margin: 0 5px;
     padding: 0 5px;
     list-style: none;
     line-height: 62px;
@@ -80,11 +85,11 @@ img {
 #navigation li a {
     text-decoration: none;
     text-transform: uppercase;
-    color: rgba(59, 72, 176, 1);
+    color: rgb(37, 149, 255);
 }
 
 #navigation li a:visited {
-    color: rgba(59, 72, 176, 1);
+    color: rgb(37, 149, 255);
 }
 
 #logo {
@@ -96,17 +101,37 @@ ul#logo-container {
     float: left;
 }
 
-#navigation .logon-nav {
-    border-left: 1px solid rgb(110, 118, 177);
-    padding-left: 15px;
+#navigation #logon-nav {
+    padding: 0 12px;
+    background-color: rgb(37, 149, 255);
+}
+
+#navigation #logon-nav a {
+    color: white;
 }
 
 #logon-nav-avatar {
     max-height: 42px;
-    padding: 8px 10px 8px 0;
+    padding: 11px 10px 8px 0;
     float: left;
 }
 
+#logged-user {
+    line-height: 13px;
+    float: left
+}
+
+#logged-user-name {
+    position: relative;
+    top: 19px;
+}
+
+#logged-user-email {
+    color: white;
+    position: relative;
+    top: 18px;
+    font-size: 11px;
+}
 
 /* Content */
 
