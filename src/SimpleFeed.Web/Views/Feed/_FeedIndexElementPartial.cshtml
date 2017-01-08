@@ -4,7 +4,7 @@
 <div class="feed-entry">
     <div class="feed-entry-createdby">
         <div class="feed-entry-author">
-            <img src="/images/user_default.png"/> @Model.Creator.UserName
+            <img src="/images/user_default.png" /> @Model.Creator.UserName
         </div>
         <time class="timeago" datetime="@Model.Model.CreationDate.ToString("s", System.Globalization.CultureInfo.InvariantCulture)">
             @Model.Model.CreationDate.ToString("d")
@@ -12,9 +12,17 @@
     </div>
 
     @Html.FeedEntryPartialFor(Model.Model)
-    
+
     <div class="feed-entry-title">
         <a href="@Url.Action("GetEntry", new { entryId = Model.Model.Id })">@Model.Model.Title</a>
+    </div>
+    <div class="feed-entry-rating">
+        <div>
+            <img src="~/images/icons/ico-upvote.png" />
+        </div>
+        <div>
+            <img src="~/images/icons/ico-downvote.png" />
+        </div>
     </div>
     <div class="feed-entry-desc">
         @Model.Model.Description
