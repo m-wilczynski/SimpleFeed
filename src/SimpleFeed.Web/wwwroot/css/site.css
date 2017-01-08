@@ -36,6 +36,11 @@ button {
     padding: 5px 10px;
 }
 
+button:hover {
+    cursor: pointer;
+    background-color: #eceaff;
+}
+
 /* Utils */
 
 .left {
