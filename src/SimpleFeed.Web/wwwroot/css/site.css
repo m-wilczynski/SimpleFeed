@@ -194,19 +194,45 @@ ul#logo-container {
 }
 
 .feed-entry-desc {
-    padding: 25px 65px 25px 65px;
+    padding: 25px 107.5px;
     background-color: rgb(37, 149, 255);
     color: white;
+    font-size: 14px;
 }
 
 .feed-entry-rating {
-    min-height: 32px;   
+    min-height: 32px;
+    position: relative;
+    float: right;
+    margin: 25px 55px 0 0;
 }
 
-.feed-entry-rating img {
+.feed-entry-votes-wrapper {
+    display: inline-block;
+    float: left;
+    padding: 0 8px;
+    position: relative;
+    top: 11px;
+}
+
+.feed-entry-votes-wrapper img {
     display: inline-block;
     height: 16px;
     width: 16px;
+}
+
+.feed-entry-votes-wrapper div {
+    height: 16px;
+}
+
+.vote-img-wrapper {
+    text-align: center; 
+}
+
+.feed-entry-votescount {
+    line-height: 16px;
+    text-align: center;
+    font-size: 12px;
 }
 
 /* Feed entries - type specific */

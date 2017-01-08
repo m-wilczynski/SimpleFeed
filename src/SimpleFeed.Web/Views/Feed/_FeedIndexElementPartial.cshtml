@@ -14,15 +14,18 @@
     @Html.FeedEntryPartialFor(Model.Model)
 
     <div class="feed-entry-title">
-        <a href="@Url.Action("GetEntry", new { entryId = Model.Model.Id })">@Model.Model.Title</a>
-    </div>
-    <div class="feed-entry-rating">
-        <div>
-            <img src="~/images/icons/ico-upvote.png" />
+        <div class="feed-entry-votes-wrapper">
+            <div class="vote-img-wrapper">
+                <img src="/images/icons/ico-upvote.png">
+            </div>
+            <div class="feed-entry-votescount">
+                123451
+            </div>
+            <div class="vote-img-wrapper">
+                <img src="/images/icons/ico-downvote.png">
+            </div>
         </div>
-        <div>
-            <img src="~/images/icons/ico-downvote.png" />
-        </div>
+        <a href="@Url.Action("GetEntry", new {entryId = Model.Model.Id})">@Model.Model.Title</a>
     </div>
     <div class="feed-entry-desc">
         @Model.Model.Description
