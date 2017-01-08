@@ -92,8 +92,11 @@
     "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ],
     "postpublish": [
       "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%",
-      "xcopy /b/v/y '%publish:OutputPath%\\web.config' '.\\web.*'",
-      ".\\run-migrations.bat"
+      "for %a in ('./') do set 'curpath=%~fa",
+      "echo %publish:OutputPath%",
+      "echo '%publish:OutputPath%\\web.config'",
+      "xcopy /b/v/y '%publish:OutputPath%\\web.config' '.\\web.*'" /*,
+      "..\\..\\run-migrations.bat" */
     ]
   }
 }
