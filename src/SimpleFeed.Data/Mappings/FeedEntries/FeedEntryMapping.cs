@@ -4,6 +4,7 @@
     using Core.FeedEntries.Base;
     using Entities.FeedEntries;
     using System.Linq;
+    using Core.FeedEntries;
     using Interactions;
     using OperationResults;
 
@@ -64,6 +65,17 @@
         public static ModelWithCreator<FeedEntryBase> AsDomainModelResolvedWithCreator(this FeedEntryEntity entity)
         {
             return new ModelWithCreator<FeedEntryBase>(entity.AsDomainModelResolved(), entity.Creator);
+        }
+
+        public static FeedEntryEntity AsEntityResolved(this FeedEntryBase model)
+        {
+            if (model is ExternalLinkFeedEntry)
+                return ((ExternalLinkFeedEntry) model).AsEntity();
+            if (model is UploadedImageFeedEntry)
+                return ((UploadedImageFeedEntry) model).AsEntity();
+            if (model is UploadedTextFeedEntry)
+                return ((UploadedTextFeedEntry) model).AsEntity();
+            throw new InvalidOperationException($"Mapping for {model.GetType()} is not defined");
         }
     }
 }

@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Options;
+    using Models;
     using _Configuration;
 
     public abstract class BaseController : Controller
@@ -18,6 +19,11 @@
         {
             Configuration = configuration;
             UserManager = userManager;
+        }
+
+        protected JsonResult AjaxRequestFailure(string message = null)
+        {
+            return new JsonResult(new AjaxRequestResult { Success = false, Message = message });
         }
     }
 }

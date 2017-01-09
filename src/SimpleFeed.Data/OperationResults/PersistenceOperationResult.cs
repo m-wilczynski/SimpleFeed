@@ -11,7 +11,7 @@
             ValidationResult = validationResult;
         }
 
-        public bool WasSuccessful => ValidationResult.WasSuccessful;
+        public virtual bool WasSuccessful => ValidationResult.WasSuccessful;
     }
 
     public class PersistenceOperationResult<TOperationOutput> : PersistenceOperationResult
@@ -23,5 +23,8 @@
         {
             Output = output;
         }
+
+        public bool NullOutput => ReferenceEquals(Output, default(TOperationOutput));
+        public override bool WasSuccessful => ValidationResult.WasSuccessful && !NullOutput;
     }
 }

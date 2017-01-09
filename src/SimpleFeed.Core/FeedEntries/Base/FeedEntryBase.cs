@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Interactions;
 
     public abstract class FeedEntryBase : ModelBase
@@ -27,6 +28,8 @@
 
         public Dictionary<Guid, FeedEntryComment> Comments => new Dictionary<Guid, FeedEntryComment>(_comments);
         public Dictionary<Guid, FeedEntryVote> Votes => new Dictionary<Guid, FeedEntryVote>(_votes);
+
+        public int VotesBalance => _votes.Values.Sum(vote => vote.IsPositive ? 1 : -1);
 
         public FeedEntryComment GetComment(Guid commentId)
         {
@@ -67,12 +70,12 @@
             return vote;
         }
 
-        public bool RemoveVote(Guid commentId)
+        public bool RemoveVote(Guid voteId)
         {
-            if (!_votes.ContainsKey(commentId)) return false;
+            if (!_votes.ContainsKey(voteId)) return false;
 
-            _voters.Remove(_votes[commentId].Creator.Value);
-            _votes.Remove(commentId);
+            _voters.Remove(_votes[voteId].Creator.Value);
+            _votes.Remove(voteId);
             return true;
         }
     }

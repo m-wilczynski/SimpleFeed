@@ -15,15 +15,27 @@
 
     <div class="feed-entry-title">
         <div class="feed-entry-votes-wrapper">
-            <div class="vote-img-wrapper">
-                <img src="/images/icons/ico-upvote.png">
+            @using (Html.BeginForm("MakeVoteForFeedEntry", "Vote", new { votedEntryId = @Model.Model.Id, isUpvote = true }, 
+                FormMethod.Post, true, new { id = $"upvote-{ Model.Model.Id }" }))
+            {
+                <div class="vote-img-wrapper">
+                    <button type="submit">
+                        <img src="/images/icons/ico-upvote.png">
+                    </button>
+                </div>
+            }
+            <div id="votescount-@Model.Model.Id" class="feed-entry-votescount">
+                <span>@Model.Model.VotesBalance</span>
             </div>
-            <div class="feed-entry-votescount">
-                123451
-            </div>
-            <div class="vote-img-wrapper">
-                <img src="/images/icons/ico-downvote.png">
-            </div>
+            @using (Html.BeginForm("MakeVoteForFeedEntry", "Vote", new {votedEntryId = @Model.Model.Id, isUpvote = false},
+                FormMethod.Post, true, new {id = $"downvote-{Model.Model.Id}"}))
+            {
+                <div class="vote-img-wrapper">
+                    <button type="submit">
+                        <img src="/images/icons/ico-downvote.png">
+                    </button>
+                </div>
+            }
         </div>
         <a href="@Url.Action("GetEntry", new {entryId = Model.Model.Id})">@Model.Model.Title</a>
     </div>
@@ -31,3 +43,11 @@
         @Model.Model.Description
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded",
+        function() {
+            wireSubmitVote("@Model.Model.Id.ToString()", true);
+            wireSubmitVote("@Model.Model.Id.ToString()", false);
+        });
+</script>

@@ -212,7 +212,7 @@ ul#logo-container {
     float: left;
     padding: 0 8px;
     position: relative;
-    top: 11px;
+    top: 12px;
 }
 
 .feed-entry-votes-wrapper img {
@@ -229,10 +229,13 @@ ul#logo-container {
     text-align: center; 
 }
 
+.vote-img-wrapper button {
+    padding: 0;
+}
+
 .feed-entry-votescount {
     line-height: 16px;
     text-align: center;
-    font-size: 12px;
 }
 
 /* Feed entries - type specific */
