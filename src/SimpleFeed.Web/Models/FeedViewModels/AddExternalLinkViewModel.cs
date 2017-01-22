@@ -5,7 +5,7 @@
     public class AddExternalLinkViewModel : AddFeedEntryViewModel
     {
         [Required]
-        [RegularExpression(@"@^(https?)://[^\s/$.?#].[^\s]*$@iS")]
+        [RegularExpression("^(https?)://[^\\s/$.?#].[^\\s]*$")]
         public string LinkAddress { get; set; }
     }
 

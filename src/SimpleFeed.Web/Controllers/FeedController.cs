@@ -14,13 +14,19 @@ namespace SimpleFeed.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
     using Models.FeedViewModels;
+    using Services;
     using _Configuration;
 
     public class FeedController : BaseController
     {
-        public FeedController(IOptions<PersistenceConfiguration> configuration, UserManager<ApplicationUser> userManager) 
+        private readonly IWebScreenshotService _screenshotService;
+
+        public FeedController(IOptions<PersistenceConfiguration> configuration, UserManager<ApplicationUser> userManager, 
+            IWebScreenshotService screenshotService) 
             : base(configuration, userManager)
         {
+            if (screenshotService == null) throw new ArgumentNullException(nameof(screenshotService));
+            _screenshotService = screenshotService;
         }
 
         [HttpGet]
@@ -71,6 +77,17 @@ namespace SimpleFeed.Controllers
                 }
             };
             var result = command.Execute();
+
+            if (result.WasSuccessful)
+            {
+                var snapshotStorageCommand = new StoreUrlSnapshotImage(Configuration.Value)
+                {
+                    EntryId = command.ExternalLink.Id,
+                    Image = await _screenshotService.GetScreenshotFor(command.ExternalLink.LinkAddress.AbsoluteUri),
+                    UserId = user.Id
+                };
+                await snapshotStorageCommand.ExecuteAsync();
+            }
 
             return !result.WasSuccessful ? 
                 RedirectToAction(nameof(AddExternalLinkForm)) : 

@@ -41,6 +41,24 @@ button:hover {
     background-color: #eceaff;
 }
 
+input {
+    border: none;
+    border-bottom: 2px solid rgb(126, 191, 253);
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 3px solid rgb(79, 169, 255);
+}
+
+form {
+    font-weight: 300;
+    font-size: 32px;
+    padding: 0 45px 15px 45px;
+}
+
 /* Utils */
 
 .left {
@@ -138,6 +156,10 @@ ul#logo-container {
     font-size: 11px;
 }
 
+#logoutForm {
+    padding: 0;
+}
+
 /* Content */
 
 #content-container {
@@ -225,6 +247,10 @@ ul#logo-container {
     height: 16px;
 }
 
+.feed-entry-votes-wrapper form {
+    padding: 0;
+}
+
 .vote-img-wrapper {
     text-align: center; 
 }
@@ -236,6 +262,12 @@ ul#logo-container {
 .feed-entry-votescount {
     line-height: 16px;
     text-align: center;
+}
+
+button.reversed {
+    width: 190px;
+    background-color: rgb(37, 149, 255);
+    color: white;
 }
 
 /* Feed entries - type specific */

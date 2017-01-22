@@ -5,4 +5,22 @@
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<h2>Add external content</h2>
+
+<form method="post" enctype="multipart/form-data" asp-controller="Feed" asp-action="AddExternalLink">
+    <div>
+        <div>
+            <p>Title:</p>
+            <input type="text" asp-for="Title" />
+            <p>Description:</p>
+            <input type="text" asp-for="Description" />
+            <p>URL:</p>
+            <input type="text" asp-for="LinkAddress" />
+        </div>
+    </div>
+    <div>
+        <div>
+            <button class="reversed" type="submit" value="Add">Add</button>
+        </div>
+    </div>
+</form>

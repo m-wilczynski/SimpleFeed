@@ -1,6 +1,7 @@
 ﻿namespace SimpleFeed.Data.Configuration
 {
     using System;
+    using Core.FeedEntries;
 
     public interface IPersistenceConfiguration
     {
@@ -11,6 +12,7 @@
 
         string GetAbsolutePathForUserContent(Guid userId);
         string GetRelativePathForUserContent(Guid userId, RelativePathRoot root = RelativePathRoot.WebRoot);
+        string GetRelativePathForUrlSnapshot(ExternalLinkFeedEntry feedEntry, RelativePathRoot root = RelativePathRoot.WebRoot);
     }
 
     public enum RelativePathRoot

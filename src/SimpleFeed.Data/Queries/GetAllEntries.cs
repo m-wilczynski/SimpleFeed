@@ -1,5 +1,6 @@
 ﻿namespace SimpleFeed.Data.Queries
 {
+    using System;
     using System.Linq;
     using Base;
     using Configuration;
@@ -24,10 +25,10 @@
         protected override PaginatedResult<ModelWithCreator<FeedEntryBase>> ExecuteInternal()
         {
             var query = Context.FeedEntries.AsNoTracking();
-            query.OrderedByDateCreated(DateCreatedOrder);
+            query = query.OrderedByDateCreated(DateCreatedOrder);
 
-            var totalPages = (uint)query.Count();
-            var mappedResult = query.WithCreatorIncluded().WithNavigationProperties()
+            var totalPages = (uint)Math.Ceiling((double)query.Count()/PaginationRequest.PageSize);
+            var mappedResult = query.WithCreatorIncluded().WithNavigationProperties().OrderedByDateCreated(DateCreatedOrder)
                 .Skip((int)((PaginationRequest.Page - 1) * PaginationRequest.PageSize)).Take((int)PaginationRequest.PageSize)
                 .Select(e => e.AsDomainModelResolvedWithCreator()).ToList();
 

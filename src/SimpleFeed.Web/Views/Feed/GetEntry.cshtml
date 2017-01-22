@@ -1,11 +1,6 @@
 ﻿@using SimpleFeed.HtmlHelpers
 @model SimpleFeed.Data.OperationResults.ModelWithCreator<SimpleFeed.Core.FeedEntries.Base.FeedEntryBase>
 
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
-
 <div class="feed-entry">
     <div class="feed-entry-createdby">
         <div class="feed-entry-author">
@@ -19,16 +14,41 @@
     @Html.FeedEntryPartialFor(Model.Model)
 
     <div class="feed-entry-title">
-        @Model.Model.Title
+        <div class="feed-entry-votes-wrapper">
+            @using (Html.BeginForm("MakeVoteForFeedEntry", "Vote", new { votedEntryId = @Model.Model.Id, isUpvote = true },
+                FormMethod.Post, true, new { id = $"upvote-{ Model.Model.Id }" }))
+            {
+                <div class="vote-img-wrapper">
+                    <button type="submit">
+                        <img src="/images/icons/ico-upvote.png">
+                    </button>
+                </div>
+            }
+            <div id="votescount-@Model.Model.Id" class="feed-entry-votescount">
+                <span>@Model.Model.VotesBalance</span>
+            </div>
+            @using (Html.BeginForm("MakeVoteForFeedEntry", "Vote", new { votedEntryId = @Model.Model.Id, isUpvote = false },
+                FormMethod.Post, true, new { id = $"downvote-{Model.Model.Id}" }))
+            {
+                <div class="vote-img-wrapper">
+                    <button type="submit">
+                        <img src="/images/icons/ico-downvote.png">
+                    </button>
+                </div>
+            }
+        </div>
+        <a href="@Url.Action("GetEntry", new {entryId = Model.Model.Id})">@Model.Model.Title</a>
     </div>
     <div class="feed-entry-desc">
         @Model.Model.Description
     </div>
 </div>
 
-<script type="text/javascript">
+<script>
     document.addEventListener("DOMContentLoaded",
         function() {
+            wireSubmitVote("@Model.Model.Id.ToString()", true);
+            wireSubmitVote("@Model.Model.Id.ToString()", false);
             $("time.timeago").timeago();
         });
 </script>

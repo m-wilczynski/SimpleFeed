@@ -1,3 +1,5 @@
-﻿@model SimpleFeed.Core.FeedEntries.ExternalLinkFeedEntry
+﻿@using SimpleFeed.Data.Configuration
+@model SimpleFeed.Core.FeedEntries.ExternalLinkFeedEntry
+@inject IPersistenceConfiguration Configuration
 
-ExternalLinkFeedEntry
+<img src="@Configuration.GetRelativePathForUrlSnapshot(Model)"/>

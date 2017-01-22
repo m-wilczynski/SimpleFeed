@@ -55,7 +55,10 @@ namespace SimpleFeed
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IWebScreenshotService, ScreenshotMachineService>();
+
             services.Configure<PersistenceConfiguration>(Configuration.GetSection("PersistenceConfiguration"));
+            services.Configure<ExternalServices>(Configuration.GetSection("ExternalServices"));
             services.Configure<PersistenceConfiguration>(c =>
             {
                 c.ContentRootPath = services.GetSingletonInstance<IHostingEnvironment>().ContentRootPath;
