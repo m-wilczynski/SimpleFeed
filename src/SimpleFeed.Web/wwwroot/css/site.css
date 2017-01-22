@@ -275,3 +275,13 @@ button.reversed {
 .uploaded-image-entry {
     width: 100%;
 }
+
+.external-link-url {
+    float: right;
+}
+
+.external-link-url a {
+    padding: 15px 35px;
+    top: 35px;
+    position: relative;
+}
