@@ -21,13 +21,16 @@
                 @await Html.PartialAsync("_LoginPartial")
                 <ul>
                     <li>
-                        <a asp-controller="Home" asp-action="Index">Home</a>
+                        <a asp-controller="Feed" asp-action="Index">Recent shares</a>
                     </li>
                     <li>
-                        <a asp-controller="Home" asp-action="About">About</a>
+                        <a asp-controller="Feed" asp-action="AddFeedEntryForm">Share something</a>
                     </li>
                     <li>
-                        <a asp-controller="Home" asp-action="Contact">Contact</a>
+                        <a asp-controller="Feed" asp-action="TopTen">TOP 10</a>
+                    </li>
+                    <li>
+                        <a asp-controller="User" asp-action="User">Users</a>
                     </li>
                 </ul>
             </div>

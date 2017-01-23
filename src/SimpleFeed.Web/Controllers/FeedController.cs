@@ -56,6 +56,13 @@ namespace SimpleFeed.Controllers
 
         [Authorize]
         [HttpGet]
+        public IActionResult AddFeedEntryForm()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpGet]
         public IActionResult AddExternalLinkForm()
         {
             return View();

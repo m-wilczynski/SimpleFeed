@@ -1,4 +1,5 @@
-﻿@using SimpleFeed.HtmlHelpers
+﻿@using SimpleFeed.Core.FeedEntries
+@using SimpleFeed.HtmlHelpers
 @model SimpleFeed.Data.OperationResults.ModelWithCreator<SimpleFeed.Core.FeedEntries.Base.FeedEntryBase>
 
 <div class="feed-entry">
@@ -39,6 +40,20 @@
         </div>
         <a href="@Url.Action("GetEntry", new {entryId = Model.Model.Id})">@Model.Model.Title</a>
     </div>
+    @if (Model.Model is UploadedImageFeedEntry)
+    {
+        <div class="feed-entry-type">
+            <img src="~/images/icons/ico-uploaded_image.png"/>
+            <span>Uploaded image</span>
+        </div>
+    }
+    else if (Model.Model is ExternalLinkFeedEntry)
+    {
+        <div class="feed-entry-type">
+            <img src="~/images/icons/ico-external_link.png" />
+            <span>External link</span>
+        </div>
+    }
     <div class="feed-entry-desc">
         @Model.Model.Description
     </div>
