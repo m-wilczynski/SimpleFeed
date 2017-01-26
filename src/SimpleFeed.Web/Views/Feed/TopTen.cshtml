@@ -1,0 +1,36 @@
+﻿@model SimpleFeed.Data.OperationResults.PersistenceOperationResult<System.Collections.Generic.ICollection<SimpleFeed.Data.OperationResults.ModelWithCreator<SimpleFeed.Core.FeedEntries.Base.FeedEntryBase>>>
+
+@{
+    Layout = "_Layout";
+}
+
+<div id="top-ten-header">
+    <div id="top-ten-img">
+        <img src="~/images/icons/ico-top-ten.png" />
+    </div>
+    <h1>
+        Top 10 entries
+    </h1>
+    <div id="top-ten-small">By votes count</div>
+</div>
+
+@{
+    if (!Model.WasSuccessful)
+    {
+        <p>Whoops, something went wrong!</p>
+    }
+    else
+    {
+        foreach (var result in Model.Output)
+        {
+            @Html.Partial("_FeedIndexElementPartial", result)
+        }
+    }
+}
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded",
+        function() {
+            $("time.timeago").timeago();
+        });
+</script>

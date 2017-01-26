@@ -7,11 +7,10 @@
 
     public abstract class FeedEntryBase : ModelBase
     {
-        public readonly string Title;
-
         private readonly Dictionary<Guid, FeedEntryComment> _comments = new Dictionary<Guid, FeedEntryComment>();
         private readonly Dictionary<Guid, FeedEntryVote> _votes = new Dictionary<Guid, FeedEntryVote>();
         private readonly HashSet<Guid> _voters = new HashSet<Guid>();
+        private string _title;
 
         protected FeedEntryBase(string title, Guid creatorId, Guid? id = null) : base(id)
         {
@@ -25,6 +24,16 @@
 
         public bool IsPublished { get; set; }
         public string Description { get; set; }
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(Title));
+                _title = value;
+            }
+        }
 
         public Dictionary<Guid, FeedEntryComment> Comments => new Dictionary<Guid, FeedEntryComment>(_comments);
         public Dictionary<Guid, FeedEntryVote> Votes => new Dictionary<Guid, FeedEntryVote>(_votes);

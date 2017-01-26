@@ -4,10 +4,11 @@
     using Base;
     using Configuration;
     using Core.FeedEntries.Base;
+    using Entities.FeedEntries;
     using EntityFramework.CommonOperations;
     using OperationResults.ValidationResults;
 
-    public class DeleteFeedEntry<TEntry> : EfCommand where TEntry : FeedEntryBase
+    public class DeleteFeedEntry : EfCommand
     {
         public DeleteFeedEntry(IPersistenceConfiguration configuration) : base(configuration)
         {
@@ -17,7 +18,7 @@
 
         protected override void ExecuteInternal()
         {
-            Context.DeleteAndSave(EntryId, typeof(TEntry));
+            Context.DeleteAndSave<FeedEntryEntity>(EntryId);
         }
 
         protected override PersistenceOperationValidationResult Validate()

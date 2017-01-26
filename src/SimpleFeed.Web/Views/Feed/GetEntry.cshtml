@@ -1,6 +1,10 @@
-﻿@using SimpleFeed.Core.FeedEntries
+﻿@using Microsoft.AspNetCore.Http
+@using SimpleFeed.Core.FeedEntries
+@using SimpleFeed.Core.User
 @using SimpleFeed.HtmlHelpers
 @model SimpleFeed.Data.OperationResults.ModelWithCreator<SimpleFeed.Core.FeedEntries.Base.FeedEntryBase>
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 <div class="feed-entry">
     <div class="feed-entry-createdby">
@@ -54,6 +58,16 @@
             <span>External link</span>
         </div>
     }
+    
+
+    @if (SignInManager.IsSignedIn(User) && Model.Creator.Id.Equals(UserManager.GetUserAsync(User).Result.Id))
+    {
+        <div class="feed-entry-author-bar">
+            @Html.ActionLink("Delete", "DeleteFeedEntry", new { entryId = Model.Model.Id }, new { Class = "right" })
+            @Html.ActionLink("Update", "EditFeedEntry", new { entryId = Model.Model.Id }, new { Class = "right" })
+        </div>
+    }
+
     <div class="feed-entry-desc">
         @Model.Model.Description
     </div>

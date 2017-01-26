@@ -21,8 +21,8 @@ namespace SimpleFeed.Controllers
     {
         private readonly IWebScreenshotService _screenshotService;
 
-        public FeedController(IOptions<PersistenceConfiguration> configuration, UserManager<ApplicationUser> userManager, 
-            IWebScreenshotService screenshotService) 
+        public FeedController(IOptions<PersistenceConfiguration> configuration, UserManager<ApplicationUser> userManager,
+            IWebScreenshotService screenshotService)
             : base(configuration, userManager)
         {
             if (screenshotService == null) throw new ArgumentNullException(nameof(screenshotService));
@@ -36,6 +36,17 @@ namespace SimpleFeed.Controllers
             {
                 PaginationRequest = new PaginationRequest(1, 10),
                 DateCreatedOrder = DateCreatedOrder.Descending,
+            }.Execute();
+
+            return View(entries);
+        }
+
+        [HttpGet]
+        public IActionResult TopTen()
+        {
+            var entries = new GetTopEntries(Configuration.Value)
+            {
+                HowMany = 10
             }.Execute();
 
             return View(entries);
@@ -96,9 +107,9 @@ namespace SimpleFeed.Controllers
                 await snapshotStorageCommand.ExecuteAsync();
             }
 
-            return !result.WasSuccessful ? 
-                RedirectToAction(nameof(AddExternalLinkForm)) : 
-                RedirectToAction(nameof(GetEntry), new {entryId = command.ExternalLink.Id});
+            return !result.WasSuccessful
+                ? RedirectToAction(nameof(AddExternalLinkForm))
+                : RedirectToAction(nameof(GetEntry), new {entryId = command.ExternalLink.Id});
         }
 
         [Authorize]
@@ -106,7 +117,7 @@ namespace SimpleFeed.Controllers
         public IActionResult AddUploadedImageForm()
         {
             return View();
-        }       
+        }
 
         [Authorize]
         [HttpPost]
@@ -132,11 +143,70 @@ namespace SimpleFeed.Controllers
             };
             var result = command.Execute();
 
-            return !result.WasSuccessful ?
-                RedirectToAction(nameof(AddUploadedImageForm)) :
-                RedirectToAction(nameof(GetEntry), new { entryId = command.UploadedImageEntry.Id });
+            return !result.WasSuccessful
+                ? RedirectToAction(nameof(AddUploadedImageForm))
+                : RedirectToAction(nameof(GetEntry), new {entryId = command.UploadedImageEntry.Id});
         }
 
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> EditFeedEntry(Guid entryId)
+        {
+            if (entryId.Equals(Guid.Empty)) return BadRequest();
 
+            var entry = new GetEntryById(Configuration.Value)
+            {
+                EntryId = entryId
+            }.Execute();
+
+            var user = await UserManager.GetUserAsync(HttpContext.User);
+            if (!entry.Output.Creator.Id.Equals(user.Id)) return Unauthorized();
+
+            return View(entry.Output.Model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateFeedEntry(UpdateFeedEntryViewModel viewModel)
+        {
+            if (!ModelState.IsValid || viewModel.Id.Equals(Guid.Empty)) return RedirectToAction(nameof(Index));
+
+            var user = await UserManager.GetUserAsync(HttpContext.User);
+            var canUpdate = new CheckIfCanModifyEntry(Configuration.Value)
+            {
+                EntryId = viewModel.Id,
+                UserId = user.Id
+            }.Execute();
+            if (!canUpdate.Output) return Unauthorized();
+
+            var result = new UpdateFeedEntry(Configuration.Value)
+            {
+                UpdatedEntryId = viewModel.Id,
+                NewTitle = viewModel.Title,
+                NewDescription = viewModel.Description
+            }.Execute();
+
+            return RedirectToAction(nameof(GetEntry), new {entryId = viewModel.Id});
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> DeleteFeedEntry(Guid entryId)
+        {
+            if (entryId.Equals(Guid.Empty)) return BadRequest();
+
+            var user = await UserManager.GetUserAsync(HttpContext.User);
+            var canDelete = new CheckIfCanModifyEntry(Configuration.Value)
+            {
+                EntryId = entryId,
+                UserId = user.Id
+            }.Execute();
+            if (!canDelete.Output) return Unauthorized();
+
+            var result = new DeleteFeedEntry(Configuration.Value) {EntryId = entryId}.Execute();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

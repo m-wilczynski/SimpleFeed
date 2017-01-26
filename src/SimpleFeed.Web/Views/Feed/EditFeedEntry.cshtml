@@ -1,0 +1,25 @@
+﻿@model SimpleFeed.Core.FeedEntries.Base.FeedEntryBase
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Update feed entry</h2>
+
+<form method="post" asp-controller="Feed" asp-action="UpdateFeedEntry">
+    <div>
+        <div>
+            <input type="hidden" asp-for="Id"/>
+            <p>Title:</p>
+            <input type="text" asp-for="Title"/>
+            <p>Description:</p>
+            <input type="text" asp-for="Description"/>
+        </div>
+    </div>
+    <div>
+        <div>
+            <button class="reversed" type="submit" value="Update">Update</button>
+        </div>
+    </div>
+</form>

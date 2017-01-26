@@ -18,7 +18,9 @@
 
         public async Task<HttpResponseMessage> GetScreenshotFor(string url)
         {
-            var serviceUrl = $"http://api.screenshotmachine.com?key={_externalServices.Value.ScreenshotMachine}&size=X&format=JPG&url={url}";
+            var serviceUrl = $"http://api.screenshotmachine.com" +
+                             $"?key={_externalServices.Value.ScreenshotMachine}&size=X&format=JPG" +
+                             $"&timeout={_externalServices.Value.ScreenshotMachineTimeout}&url={url}";
             return await new HttpClient().GetAsync(serviceUrl);
         }
     }
