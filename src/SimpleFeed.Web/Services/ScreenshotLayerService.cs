@@ -20,7 +20,7 @@
         {
             var serviceUrl =
                 "http://api.screenshotlayer.com/api/capture?" +
-                $"access_key={_externalServices.Value.ScreenshotLayer}&url=http://reddit.com&viewport=1024x768&width=1024";
+                $"access_key={_externalServices.Value.ScreenshotLayer}&url={url}&viewport=1024x768&width=1024";
             return await new HttpClient().GetAsync(serviceUrl);
         }
     }
