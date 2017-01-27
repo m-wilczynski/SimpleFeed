@@ -4,5 +4,6 @@
     {
         public string ScreenshotMachine { get; set; }
         public int ScreenshotMachineTimeout { get; set; }
+        public string ScreenshotLayer { get; set; }
     }
 }

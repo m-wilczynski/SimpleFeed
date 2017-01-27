@@ -8,9 +8,10 @@ using SimpleFeed.Data;
 namespace SimpleFeed.Data.Migrations
 {
     [DbContext(typeof(SimpleFeedContext))]
-    partial class SimpleFeedContextModelSnapshot : ModelSnapshot
+    [Migration("20170127004652_ApplicationUser-Extension")]
+    partial class ApplicationUserExtension
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752");

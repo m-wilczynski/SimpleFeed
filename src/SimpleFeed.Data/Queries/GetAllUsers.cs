@@ -6,11 +6,10 @@
     using Configuration;
     using Core.FeedEntries.Base;
     using Core.User;
-    using EntityFramework.CommonOperations;
-    using EntityFramework.EagerLoading;
     using Microsoft.EntityFrameworkCore;
     using OperationInputs;
     using OperationResults;
+    using OperationResults.User;
     using OperationResults.ValidationResults;
 
     public class GetAllUsers : EfQuery<PaginatedResult<ApplicationUser>>
@@ -23,16 +22,14 @@
 
         protected override PaginatedResult<ApplicationUser> ExecuteInternal()
         {
-            //var query = Context.Users.AsNoTracking();
+            var query = Context.Users.AsNoTracking();
 
-            //var totalPages = (uint)Math.Ceiling((double)query.Count() / PaginationRequest.PageSize);
-            //var mappedResult = query.OrderByDescending(ap => ap.UserName)
-            //    .Skip((int)((PaginationRequest.Page - 1) * PaginationRequest.PageSize)).Take((int)PaginationRequest.PageSize)
-            //    .Select(e => e.AsDomainModelResolvedWithCreator()).ToList();
+            var totalPages = (uint)Math.Ceiling((double)query.Count() / PaginationRequest.PageSize);
+            var mappedResult = query.OrderByDescending(ap => ap.UserName)
+                .Skip((int)((PaginationRequest.Page - 1) * PaginationRequest.PageSize)).Take((int)PaginationRequest.PageSize)
+                .ToList();
 
-            //return new PaginatedResult<ModelWithCreator<FeedEntryBase>>(mappedResult, new PaginationInfo(totalPages, PaginationRequest));
-            return null;
-
+            return new PaginatedResult<ApplicationUser>(mappedResult, new PaginationInfo(totalPages, PaginationRequest));
         }
 
         protected override PersistenceOperationValidationResult Validate()

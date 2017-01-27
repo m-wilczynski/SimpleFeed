@@ -10,7 +10,6 @@ namespace SimpleFeed.Data
     using EntityFramework.EntityConfigurations.Interactions;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using Newtonsoft.Json;
 
     public class SimpleFeedContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
