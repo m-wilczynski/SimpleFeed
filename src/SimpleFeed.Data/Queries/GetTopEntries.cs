@@ -24,7 +24,8 @@
             var query = Context.FeedEntries.AsNoTracking();
 
             var mappedResult = query.WithCreatorIncluded().WithNavigationProperties()
-                .OrderByDescending(e => e.Votes.Sum(v => v.IsPositive ? 1 : -1))
+                //EntityFramework and then MySQL treats SUM of zero elements as NULL
+                .OrderByDescending(e => e.Votes.Count > 0 ? e.Votes.Sum(v => v.IsPositive ? 1 : -1) : 0)
                 .Take((int)HowMany)
                 .ToList().Select(e => e.AsDomainModelResolvedWithCreator()).ToList();
 
