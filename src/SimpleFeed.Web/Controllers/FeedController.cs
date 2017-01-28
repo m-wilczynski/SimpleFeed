@@ -13,6 +13,7 @@ namespace SimpleFeed.Controllers
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
+    using Models;
     using Models.FeedViewModels;
     using Services;
     using _Configuration;
@@ -84,7 +85,7 @@ namespace SimpleFeed.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddExternalLink(AddExternalLinkViewModel viewModel)
         {
-            if (!ModelState.IsValid) return RedirectToAction(nameof(AddExternalLinkForm));
+            if (!ModelState.IsValid) return AjaxRequestFailure();
 
             var user = await UserManager.GetUserAsync(HttpContext.User);
             var command = new AddExternalLinkEntry(Configuration.Value)
@@ -106,10 +107,18 @@ namespace SimpleFeed.Controllers
                 };
                 await snapshotStorageCommand.ExecuteAsync();
             }
+            else
+            {
+                return AjaxRequestFailure(result.ValidationResult.ValidationMessage);
+            }
 
-            return !result.WasSuccessful
-                ? RedirectToAction(nameof(AddExternalLinkForm))
-                : RedirectToAction(nameof(GetEntry), new {entryId = command.ExternalLink.Id});
+            return new JsonResult(
+                new AddExternalLinkResultViewModel
+                {
+                    EntryId = command.ExternalLink.Id,
+                    Message = result.ValidationResult.ValidationMessage,
+                    Success = result.WasSuccessful
+                });
         }
 
         [Authorize]

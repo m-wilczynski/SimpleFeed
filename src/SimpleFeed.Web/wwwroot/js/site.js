@@ -19,3 +19,16 @@
         e.preventDefault();
     });
 }
+
+function showLoader(loaderText) {
+
+    var loader = document.getElementById('loader');
+    var animationWrapper = document.getElementById('loader-animation-wrapper');
+    if (!loader || !animationWrapper) throw 'One of loader elements not found!';
+
+    animationWrapper.style.marginTop = (window.innerHeight / 2 - 110) + "px";
+    loader.style.display = 'initial';
+    loader.focus();
+
+    animateWave(loaderText);
+}

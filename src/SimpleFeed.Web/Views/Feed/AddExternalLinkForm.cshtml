@@ -7,20 +7,43 @@
 
 <h2>Add external content</h2>
 
-<form method="post" enctype="multipart/form-data" asp-controller="Feed" asp-action="AddExternalLink">
+@using (Html.BeginForm("AddExternalLink", "Feed", null, FormMethod.Post, true, new { id = "external-link-form" }))
+{
     <div>
         <div>
+            <div>DUPA</div>
             <p>Title:</p>
-            <input type="text" asp-for="Title" />
+            <input type="text" asp-for="Title"/>
             <p>Description:</p>
-            <input type="text" asp-for="Description" />
+            <input type="text" asp-for="Description"/>
             <p>URL:</p>
-            <input type="text" asp-for="LinkAddress" />
+            <input type="text" asp-for="LinkAddress"/>
         </div>
     </div>
     <div>
         <div>
-            <button class="reversed" type="submit" value="Add">Add</button>
+            <button id="external-link-submit" type="submit" class="reversed" value="Add">Add</button>
         </div>
     </div>
-</form>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded",
+            function() {
+                    document.getElementById('external-link-form').addEventListener('submit', function(e) {
+                        $.ajax({
+                            async: true,
+                            url: this.action,
+                            type: this.method,
+                            dataType: "json",
+                            data: $(this).serialize(),
+                            success: function(result) {
+                                if (!result.success) return;
+                                window.location = '/Feed/GetEntry?entryId=' + result.entryId;
+                            }
+                        });
+                        e.preventDefault();
+                        showLoader('Generating screenshot...');
+                    });
+            });
+    </script>
+}
