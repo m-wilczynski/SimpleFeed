@@ -1,0 +1,48 @@
+﻿@using SimpleFeed.Core
+@using SimpleFeed.HtmlHelpers
+@model SimpleFeed.Data.OperationResults.User.ApplicationUserWithFeedActivity
+
+<div class="container">
+    <div class="user-top-panel">
+        <div class="user-top-panel-general">
+            <img class="user-img-big" src="/images/user_default.png">
+            <div class="user-title">
+                <div class="user-name">@Model.User.UserName</div>
+                <div class="user-registration-date">Registered on @Model.User.RegistrationDate.ToString("d")</div>
+            </div>
+            <div class="user-activity-counters">
+                <div class="counter">
+                    <img src="~/images/icons/ico-entries.png" />
+                    <div class="counter-text">
+                        @Model.EntriesCreated.Count things shared
+                    </div>
+                </div>
+                <div class="counter">
+                    <img src="~/images/icons/ico-votes.png" />
+                    <div class="counter-text">
+                        @Model.VotesMade.Count votes made
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separator"></div>
+        <div class="user-desc">
+            @Model.User.UserDescription
+        </div>
+    </div>
+    <div class="user-recent">
+        <div class="recent-title">Recent activity (last 5)</div>
+        <table>
+            <tbody>
+            @{
+                var allActivities = Model.EntriesCreated.OfType<ModelBase>().Concat(Model.VotesMade);
+
+                foreach (var activity in allActivities.OrderByDescending(a => a.CreationDate).Take(5))
+                {
+                    @Html.ActivityPartialFor(activity)
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

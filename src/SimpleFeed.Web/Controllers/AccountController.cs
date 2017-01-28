@@ -112,7 +112,8 @@ namespace SimpleFeed.Controllers
                 {
                     UserName = !string.IsNullOrEmpty(model.Username) ? model.Username : model.Email,
                     Email = model.Email,
-                    RegistrationDate = DateTime.Now
+                    RegistrationDate = DateTime.Now,
+                    UserDescription = model.UserDescription
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

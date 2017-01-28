@@ -27,7 +27,7 @@ input {
 h1 {
     text-align: center;
     font-size: 48px;
-    font-weight: 400;
+    font-weight: 300;
 }
 
 h2 {
@@ -74,6 +74,14 @@ form {
     padding: 0 45px 15px 45px;
 }
 
+input[type='checkbox'] {
+    
+}
+
+.container {
+    padding: 0 55px 15px 55px;
+}
+
 /* Utils */
 
 .left {
@@ -86,6 +94,12 @@ form {
 
 .right-text {
     text-align: right;
+}
+
+.separator {
+    height: 1px;
+    width: 100%;
+    border-bottom: 1px solid gray;
 }
 
 
@@ -184,8 +198,14 @@ ul#logo-container {
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.75);
+    opacity: 0;
+    background-color: rgba(0,0,0,0.85);
     z-index: 9999;
+    -webkit-transition: opacity 0.4s ease-in-out;
+    -moz-transition: opacity 0.4s ease-in-out;
+    -ms-transition: opacity 0.4s ease-in-out;
+    -o-transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
 }
 
 #loader-animation-wrapper {
@@ -275,6 +295,10 @@ ul#logo-container {
     padding: 25px
 }
 
+.feed-entry a {
+    text-decoration: none;
+}
+
 .feed-entry .timeago {
     display: inline-block;
     float: right;
@@ -355,6 +379,11 @@ button.reversed:hover {
     background-color: rgb(21, 125, 222);
 }
 
+button.reversed a {
+    color: white;
+    text-decoration: none;
+}
+
 /* Feed entries - type specific */
 
 .feed-entry-type {
@@ -415,11 +444,16 @@ button.reversed:hover {
 }
 
 .choose-entry {
-    width: 50%;
-    height: 100%;
+    width: 45%;
+    height: auto;
     display: inline-block;
     float: left;
     text-align: center;
+    padding: 50px 2.5%;
+}
+
+.choose-entry img {
+    max-width: 92px;
 }
 
 .choose-entry-text {
@@ -427,10 +461,10 @@ button.reversed:hover {
     font-size: 20px;
     width: 240px;
     margin: 40px auto;
-    border: 1px solid rgb(37, 149, 255);
+    border-bottom: 1px solid rgb(37, 149, 255);
     text-align: center;
-    border-radius: 25px;
     padding: 2.5px 0;
+    font-weight: 300;
 }
 
 .feed-entry-author-bar {
@@ -479,4 +513,98 @@ button.reversed:hover {
     font-size: 20px;
      margin: 0 auto;
      text-align: center;
+}
+
+/* User */
+
+label[for='RememberMe'] input {
+    width: auto;
+}
+
+.user-top-panel {
+    min-height: 128px;
+    padding: 25px 45px;
+    -webkit-box-shadow: 0px 2px 15px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 2px 15px 2px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 15px 2px rgba(0,0,0,0.1);
+}
+
+.user-top-panel-general {
+    height: 128px;
+}
+
+.user-img-big {
+    float: left;
+}
+
+.user-name {
+    font-size: 32px;
+}
+
+.user-title {
+    display: inline-block;
+    float: left;
+    line-height: 24px;
+    padding: 42px 32px;
+}
+
+.user-registration-date {
+    margin-left: 2px;
+}
+
+.user-activity-counters {
+    float: right;
+    height: 32px;
+    min-width: 200px;
+    margin: 36px 0 36px 0;
+}
+
+.user-activity-counters .counter img {
+    max-height: 32px;
+    margin: 0 5px;
+    float: left;
+}
+
+.user-activity-counters .counter-text {
+    height: 32px;
+    line-height: 32px;
+}
+
+.user-top-panel .separator {
+    margin: 25px auto;
+    border-bottom: 1px solid #cccccc;
+    width: 95%;
+}
+
+.user-top-panel .user-desc {
+    padding: 0 30px 20px 30px;
+}
+
+.user-recent {
+    margin-top: 25px;
+    padding: 25px;
+    -webkit-box-shadow: 0px 2px 15px 2px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 2px 15px 2px rgba(0,0,0,0.1);
+    box-shadow: 0px 2px 15px 2px rgba(0,0,0,0.1);
+}
+
+.user-recent .recent-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #cccccc;
+    padding: 5px 0;
+}
+
+.user-recent img {
+    float: left;
+    max-height: 24px;
+    margin-right: 10px;
+}
+
+.user-recent table {
+    width: 100%;
+}
+
+.user-recent .activity-creation-date {
+    float: right;
 }

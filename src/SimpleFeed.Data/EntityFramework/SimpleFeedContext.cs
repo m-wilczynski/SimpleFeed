@@ -27,6 +27,7 @@ namespace SimpleFeed.Data
         internal DbSet<UploadedImageFeedEntryEntity> UploadedImages { get; set; }
         internal DbSet<UploadedTextFeedEntryEntity> UploadedTexts { get; set; }
         internal DbSet<FeedEntryCommentEntity> Comments { get; set; }
+        internal DbSet<FeedEntryVoteEntity> FeedEntryVotes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

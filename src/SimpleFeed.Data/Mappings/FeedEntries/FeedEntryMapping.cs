@@ -12,7 +12,7 @@
     {
         public static FeedEntryBase WithVotesAndCommentsWired(this FeedEntryBase model, FeedEntryEntity entity)
         {
-            if (model.Votes != null)
+            if (entity.Votes != null)
             {
                 foreach (var vote in entity.Votes)
                 {
@@ -21,7 +21,7 @@
                 }
             }
 
-            if (model.Comments != null)
+            if (entity.Comments != null)
             {
                 foreach (var comment in entity.Comments)
                 {

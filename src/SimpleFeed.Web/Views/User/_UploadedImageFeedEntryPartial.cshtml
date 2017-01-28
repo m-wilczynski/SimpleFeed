@@ -1,0 +1,9 @@
+﻿@model SimpleFeed.Core.FeedEntries.UploadedImageFeedEntry
+
+<tr>
+    <td>
+        <img src="~/images/icons/ico-entries.png" />
+        Added image entry called @Html.ActionLink(Model.Title, "GetEntry", "Feed", new {entryId = Model.Id})
+        <div class="activity-creation-date">@Model.CreationDate.ToString("G")</div>
+    </td>
+</tr>

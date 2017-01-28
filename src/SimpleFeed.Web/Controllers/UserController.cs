@@ -1,7 +1,10 @@
 ﻿namespace SimpleFeed.Controllers
 {
+    using System;
     using Base;
     using Core.User;
+    using Data.Queries;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -15,9 +18,21 @@
 
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Authorize]
+        public IActionResult GetUser(Guid userId)
+        {
+            var user = new GetUserWithActivity(Configuration.Value)
+            {
+                UserId = userId
+            }.Execute();
+
+            return View(user.Output);
         }
     }
 }

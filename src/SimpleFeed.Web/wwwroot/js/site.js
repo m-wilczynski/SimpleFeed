@@ -28,6 +28,7 @@ function showLoader(loaderText) {
 
     animationWrapper.style.marginTop = (window.innerHeight / 2 - 110) + "px";
     loader.style.display = 'initial';
+    loader.style.opacity = 1;
     loader.focus();
 
     animateWave(loaderText);

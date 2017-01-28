@@ -5,7 +5,10 @@
 <div class="feed-entry">
     <div class="feed-entry-createdby">
         <div class="feed-entry-author">
-            <img src="/images/user_default.png" /> @Model.Creator.UserName
+            <a href="@Url.Action("GetUser", "User", new { userId = @Model.Creator.Id })">
+                <img src="/images/user_default.png"/> 
+                @Model.Creator.UserName
+            </a>
         </div>
         <time class="timeago" datetime="@Model.Model.CreationDate.ToString("s", System.Globalization.CultureInfo.InvariantCulture)">
             @Model.Model.CreationDate.ToString("d")

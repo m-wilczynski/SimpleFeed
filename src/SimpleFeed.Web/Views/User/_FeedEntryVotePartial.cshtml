@@ -1,0 +1,17 @@
+﻿@model SimpleFeed.Core.Interactions.FeedEntryVote
+
+<tr>
+    <td>
+        <img src="~/images/icons/ico-votes.png"/>
+        Made @if (Model.IsPositive)
+             {
+                 <span>positive</span>
+             }
+             else
+             {
+                 <span>negative</span>
+             }
+        vote on @Html.ActionLink(Model.VotedEntry.Title, "GetEntry", "Feed", new {entryId = Model.VotedEntry.Id})
+        <div class="activity-creation-date">@Model.CreationDate.ToString("G")</div>
+    </td>
+</tr>

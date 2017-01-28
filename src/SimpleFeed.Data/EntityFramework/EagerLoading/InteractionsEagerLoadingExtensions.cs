@@ -10,5 +10,11 @@
         {
             return entities.Include(e => e.CommentedEntity).Include(e => e.Votes);
         }
+
+        public static IQueryable<FeedEntryVoteEntity> WithNavigationProperties(
+            this IQueryable<FeedEntryVoteEntity> entities)
+        {
+            return entities.Include(e => e.VotedEntry).ThenInclude(ve => ve.Votes);
+        }
     }
 }
