@@ -4,7 +4,6 @@
     using Core;
 
     public class NotFoundValidationResult<TModel> : PersistenceOperationValidationResult
-        where TModel : ModelBase
     {
         public readonly Guid NotFoundId;
         public readonly Type NotFoundType;

@@ -3,6 +3,7 @@
     using System;
     using Base;
     using Core.User;
+    using Data.OperationInputs;
     using Data.Queries;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -21,7 +22,12 @@
         [Authorize]
         public IActionResult Index()
         {
-            return View();
+            var users = new GetAllUsers(Configuration.Value)
+            {
+                PaginationRequest = new PaginationRequest(1, 10)
+            }.Execute();
+
+            return View(users.Output);
         }
 
         [Authorize]

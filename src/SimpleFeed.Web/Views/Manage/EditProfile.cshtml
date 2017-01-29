@@ -1,0 +1,17 @@
+﻿@model EditUserDetailsViewModel
+
+<h2>Update user details</h2>
+
+<form method="post" asp-controller="Manage" asp-action="EditProfileDetails">
+    <div>
+        <div>
+            <p>Description:</p>
+            <input type="text" asp-for="Description" />
+        </div>
+    </div>
+    <div>
+        <div>
+            <button class="reversed" type="submit" value="Update">Update</button>
+        </div>
+    </div>
+</form>

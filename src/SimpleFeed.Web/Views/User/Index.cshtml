@@ -1,8 +1,28 @@
-﻿@model dynamic
+﻿@model SimpleFeed.Data.OperationResults.PaginatedResult<SimpleFeed.Core.User.ApplicationUser>
 
 @{
-    ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
-<h2>title</h2>
+<div class="container">
+    <div class="user-list">
+        <div class="user-list-title">Users</div>
+        <table>
+            <thead>
+            <tr>
+                <th class="left">
+                    Username
+                </th>
+                <th class="right">
+                    Registration date
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var user in Model.Result)
+            {
+                @Html.Partial("_UserTableItem", user)
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

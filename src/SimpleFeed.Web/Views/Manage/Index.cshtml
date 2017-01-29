@@ -1,4 +1,7 @@
-﻿@model IndexViewModel
+﻿@using SimpleFeed.Core.User
+@model IndexViewModel
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Manage your account";
 }
@@ -18,6 +21,15 @@
             {
                 <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Create password</a>
             }
+        </button>
+    </div>
+    <div>
+        <h3>Personal details</h3>
+        <button class="reversed">
+            @Html.ActionLink("Show my profile", "GetUser", "User", new { userId = UserManager.GetUserId(User) })
+        </button>
+        <button class="reversed">
+            @Html.ActionLink("Edit my profile", "EditProfile", "Manage")
         </button>
     </div>
 </div>

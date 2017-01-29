@@ -11,6 +11,9 @@ namespace SimpleFeed.Controllers
 {
     using Core.User;
     using Data;
+    using Data.Commands.User;
+    using Microsoft.Extensions.Options;
+    using _Configuration;
 
     [Authorize]
     public class ManageController : Controller
@@ -19,6 +22,7 @@ namespace SimpleFeed.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
+        private readonly IOptions<PersistenceConfiguration> _configuration;
         private readonly ILogger _logger;
 
         public ManageController(
@@ -26,12 +30,14 @@ namespace SimpleFeed.Controllers
         SignInManager<ApplicationUser> signInManager,
         IEmailSender emailSender,
         ISmsSender smsSender,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory,
+        IOptions<PersistenceConfiguration> configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
+            _configuration = configuration;
             _logger = loggerFactory.CreateLogger<ManageController>();
         }
 
@@ -343,5 +349,31 @@ namespace SimpleFeed.Controllers
         }
 
         #endregion
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> EditProfile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            return View(new EditUserDetailsViewModel
+            {
+                Description = user.UserDescription
+            });
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProfileDetails(EditUserDetailsViewModel editDetails)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var result = new UpdateUserDetails(_configuration.Value)
+            {
+                UserId = user.Id,
+                Description = editDetails.Description
+            }.Execute();
+
+            return RedirectToAction("GetUser", "User", new {userId = user.Id});
+        }
     }
 }

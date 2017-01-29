@@ -1,0 +1,9 @@
+﻿@model SimpleFeed.Core.User.ApplicationUser
+
+<tr class="user-list-row">
+    <td>
+        <img src="/images/user_default.png" /> 
+        @Html.ActionLink(Model.UserName, "GetUser", "User", new { userId = Model.Id })
+        <div class="user-list-registration">@Model.RegistrationDate.ToString("d")</div>
+    </td>
+</tr>
