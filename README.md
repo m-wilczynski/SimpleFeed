@@ -5,8 +5,8 @@
 **Description**
 
 Simple web feed for posting, categorizing, rating and commenting any media.
-Project created for checking how mature ASP.NET Core and EF Core environment is mature at the moment.
-Project uses rich domain models, persistence seperation on project level and simple, self scripted, self styled views using both postbacks and AJAX.
+Project created for checking how mature ASP.NET Core and EF Core environment is at the moment.
+Project uses rich domain models, persistence seperation (with status-object-driven CQS operations) on project level and simple, self scripted, self styled views using both postbacks and AJAX.
 
 **Technologies used**
 - ASP.NET Core 1.1 
