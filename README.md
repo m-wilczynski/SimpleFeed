@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://s27.postimg.org/s64ssw9kz/logo.png" />
+  <img src="https://raw.githubusercontent.com/m-wilczynski/SimpleFeed/master/src/SimpleFeed.Web/wwwroot/images/logo.png" />
 </p>
 
 **Description**
